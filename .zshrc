@@ -99,3 +99,57 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Use neovim everywhere
+export EDITOR="nvim"
+export VISUAL=$EDITOR
+alias vim=$EDITOR
+
+alias ll="ls -lahF"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# Git aliases
+alias g="git"
+alias gs="git status"
+alias ga="git add"
+alias gau="git add -u"
+alias gl="git lg"
+alias gcm="git commit -m"
+alias gce="git checkout"
+alias gb="git branch -vv"
+alias gcem="git checkout master"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gdu="git diff @{upstream}"
+alias gdno="git diff --name-only"
+alias gduno="git diff @{upstream} --name-only"
+alias gdm="git diff master"
+alias gdmno="git diff master --name-only"
+alias gst="git stash"
+alias gsl="git stash list"
+alias gspm="git stash --push -m"
+alias gca="git commit --amend"
+alias gcane="git commit --amend --no-edit"
+alias gp="git pull"
+
+alias zj="zellij"
+alias za="zj attach"
+alias zls="zj list-sessions"
+
+# Point to cargo environment
+. "$HOME/.cargo/env"
+
+# Added by pico_setup.sh
+export PICO_SDK_PATH="/home/tyler/devel/pico/pico-sdk"
+export PICO_EXAMPLES_PATH="/home/tyler/devel/pico/pico-examples"
+export PICO_EXTRAS_PATH="/home/tyler/devel/pico/pico-extras"
+export PICO_PLAYGROUND_PATH="/home/tyler/devel/pico/pico-playground"
+export PICO_SDK_PATH="/home/tyler/devel/pico/pico-sdk"
+export PICO_EXAMPLES_PATH="/home/tyler/devel/pico/pico-examples"
+export PICO_EXTRAS_PATH="/home/tyler/devel/pico/pico-extras"
+export PICO_PLAYGROUND_PATH="/home/tyler/devel/pico/pico-playground"
+
+# Added for golang
+export PATH=$PATH:/usr/local/go/bin
