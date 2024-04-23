@@ -1,0 +1,6 @@
+.git
+.gitignore
+# Keep this in the repo for reference, but don't stow it so we don't overwrite
+.gitconfig
+
+stow.sh
