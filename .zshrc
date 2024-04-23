@@ -100,6 +100,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Put all your local configuration that shouldn't be publicly version
+# controlled into here
+export LOCAL_ZSHRC="$HOME/.local_zshrc"
+if [[ -f $LOCAL_ZSHRC ]]; then
+  source $LOCAL_ZSHRC
+fi
+
 # Use neovim everywhere
 export EDITOR="nvim"
 export VISUAL=$EDITOR
@@ -134,22 +141,13 @@ alias gca="git commit --amend"
 alias gcane="git commit --amend --no-edit"
 alias gp="git pull"
 
+# Zellij aliases
 alias zj="zellij"
 alias za="zj attach"
 alias zls="zj list-sessions"
 
-# Point to cargo environment
-. "$HOME/.cargo/env"
-
-# Added by pico_setup.sh
-export PICO_SDK_PATH="/home/tyler/devel/pico/pico-sdk"
-export PICO_EXAMPLES_PATH="/home/tyler/devel/pico/pico-examples"
-export PICO_EXTRAS_PATH="/home/tyler/devel/pico/pico-extras"
-export PICO_PLAYGROUND_PATH="/home/tyler/devel/pico/pico-playground"
-export PICO_SDK_PATH="/home/tyler/devel/pico/pico-sdk"
-export PICO_EXAMPLES_PATH="/home/tyler/devel/pico/pico-examples"
-export PICO_EXTRAS_PATH="/home/tyler/devel/pico/pico-extras"
-export PICO_PLAYGROUND_PATH="/home/tyler/devel/pico/pico-playground"
+# Added for rust
+source "$HOME/.cargo/env"
 
 # Added for golang
 export PATH=$PATH:/usr/local/go/bin
