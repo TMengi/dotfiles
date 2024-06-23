@@ -65,7 +65,7 @@ eval `dircolors ~/.dir_colors/dircolors`
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$ZSH/custom
+# ZSH_CUSTOM=$ZSH/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -75,11 +75,10 @@ ZSH_CUSTOM=$ZSH/custom
 plugins=(
   git
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
-
-source /home/tyler/tools/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Expand aliases with "C-x a" or tab
 bindkey "^Xa" _expand_alias
