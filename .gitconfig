@@ -1,0 +1,13 @@
+[user]
+  name = tyler
+  email = tmccown21@gmail.com
+[core]
+  editor = nvim
+  excludesfile = .local_gitignore
+  pager = less -FRSX
+[alias]
+  lg = log --graph --pretty=format:'%Cred%h%Creset%  -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[pager]
+  branch = false
+[credential "https://github.com"]
+  helper = !/usr/bin/gh auth git-credential
