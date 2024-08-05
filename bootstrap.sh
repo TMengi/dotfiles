@@ -95,9 +95,24 @@ else
   echo "installing ripgrep"
   cargo install ripgrep
 fi
+
+# Alacritty has a bunch of apt requirements
+sudo apt install pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+if [[ "$(command -v alacritty)" ]]; then
+  echo "alacritty already installed"
+else
+  echo "installing alacritty"
+  cargo install alacritty
+fi
+
+if [[ "$(command -v zellij)" ]]; then
+  echo "zellij already installed"
+else
+  echo "installing zellij"
+  cargo install zellij
+fi
+
 # TODO:
-# zellij
-# alacrity
 # dircolors
 # zsh-syntax-highlighting
 
