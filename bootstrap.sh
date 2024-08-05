@@ -40,6 +40,7 @@ apt_check_or_install gcc
 apt_check_or_install g++
 apt_check_or_install cmake
 apt_check_or_install wl-copy wl-clipboard
+apt_check_or_install stow
 
 ###############################################################################
 print_header "Installing shell"
