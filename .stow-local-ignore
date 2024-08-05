@@ -1,6 +1,12 @@
+# Git stuff
 .git
 .gitignore
 # Keep this in the repo for reference, but don't stow it so we don't overwrite
 .gitconfig
 
+# The stowing script itself
 stow.sh
+
+# Folder for applications files that can't be stowed directly since they are
+# not under the home tree
+applications

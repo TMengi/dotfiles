@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(git rev-parse --show-toplevel)"
-echo "Stowing from $repo_root"
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+echo "Stowing from $REPO_ROOT"
 
-$(cd $repo_root && stow .)
+$(cd $REPO_ROOT && stow .)
+echo "Done"

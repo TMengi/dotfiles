@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Alacritty
+Exec=/home/tyler/.cargo/bin/alacritty
+Terminal=false
+Type=Application
+Icon=/opt/alacritty/alacritty.svg
