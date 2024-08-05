@@ -1,7 +1,1 @@
-# My old way of doing things using a legacy vimrc, plus configuration settings
-# for my coc-nvim LSP
-init.vim.backup
-coc-settings.json
-
-# For lazy.nvim package manager
-lazy-lock.json
+# Nothing here yet!
