@@ -10,6 +10,7 @@ function print_header() {
   echo '################################################################################'
 }
 
+# DEPRECATED
 # Check if something is already installed, then install it with apt
 #
 # Args:
@@ -34,18 +35,19 @@ function apt_check_or_install() {
 ###############################################################################
 print_header "Install baseline software"
 
-apt_check_or_install git
-apt_check_or_install curl
-apt_check_or_install gcc
-apt_check_or_install g++
-apt_check_or_install cmake
-apt_check_or_install wl-copy wl-clipboard
-apt_check_or_install stow
+sudo apt install \
+git \
+curl \
+gcc \
+g++ \
+cmake \
+wl-clipboard \
+stow \
 
 ###############################################################################
 print_header "Installing shell"
 
-apt_check_or_install zsh
+sudo apt install zsh
 if [[ $SHELL == "$(which zsh)" ]]; then
   echo "SHELL is already zsh"
 else
@@ -97,24 +99,17 @@ else
 fi
 
 # Alacritty has a bunch of apt requirements
-sudo apt install pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-if [[ "$(command -v alacritty)" ]]; then
-  echo "alacritty already installed"
-else
-  echo "installing alacritty"
-  cargo install alacritty
-fi
+sudo apt install \
+pkg-config \
+libfreetype6-dev \
+libfontconfig1-dev \
+libxcb-xfixes0-dev \
+libxkbcommon-dev \
+python3 \
 
-if [[ "$(command -v zellij)" ]]; then
-  echo "zellij already installed"
-else
-  echo "installing zellij"
-  cargo install zellij
-fi
+cargo install alacritty
 
-# TODO:
-# dircolors
-# zsh-syntax-highlighting
+cargo install zellij
 
 ###############################################################################
 print_header "Boostrap complete!"
