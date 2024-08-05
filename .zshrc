@@ -108,25 +108,26 @@ if [[ -f $LOCAL_ZSHRC ]]; then
 fi
 
 # Use neovim everywhere
-export EDITOR="nvim"
+export EDITOR='nvim'
 export VISUAL=$EDITOR
 alias vim=$EDITOR
+alias nvc='cd ~/.config/nvim'
 
-alias ll="ls -lahF"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+alias ll='ls -lahF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Tmux stuff
 alias tls='tmux list-sessions'
 alias tat='tmux a -t'
 
 # Git aliases
-alias g="git"
-alias gce="git checkout"
-alias gp="git pull"
-alias gd="git diff"
-alias gb="git branch -vv"
+alias g='git'
+alias gce='git checkout'
+alias gp='git pull'
+alias gd='git diff'
+alias gb='git branch -vv'
 alias ga='git add'
 alias gr='git rebase'
 alias gst='git stash'
@@ -159,9 +160,12 @@ alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 
 # Zellij aliases
-alias zj="zellij"
-alias za="zj attach"
-alias zls="zj list-sessions"
+alias zj='zellij'
+alias za='zj attach'
+alias zls='zj list-sessions'
+
+# Always use python 3
+alias python='python3'
 
 # Added for rust
 source "$HOME/.cargo/env"
