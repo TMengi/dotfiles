@@ -113,6 +113,7 @@ end
 highlight_like('*.sim', 'yaml')
 highlight_like('*.prototxt', 'yaml')
 highlight_like('BUILD.pants', 'python')
+highlight_like('.local_zshrc', 'zsh')
 
 -- Explicitly set the comment string for certain uncommon filetypes
 local set_commentstring = function(filetype, commentstring)
