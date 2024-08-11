@@ -171,3 +171,6 @@ keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
 
 -- Command to split newline delimited raw strings
 vim.api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
+
+-- Keybinding to open lazygit
+keymap.set('n', '<leader>gg', ':LazyGit<cr>', noremap)
