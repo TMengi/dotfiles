@@ -80,6 +80,7 @@ function zsh_check_or_install() {
 
 zsh_check_or_install zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 zsh_check_or_install zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
+# TODO zsh-completions
 
 ###############################################################################
 print_header "Installing rust toolchain"

@@ -1,6 +1,10 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/home/tyler/.local/bin:$PATH
+function append_path() {
+  export PATH=$PATH:$1
+}
+append_path $HOME/bin
+append_path $HOME/.local/bin
+append_path /usr/local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -11,6 +15,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="gnzh"
 eval `dircolors ~/.dir_colors/dircolors`
+
+# Don't throw errors about unmatched globs
+setopt CSH_NULL_GLOB
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,13 +106,10 @@ BRANCH="\$(git_prompt)"
 PS1="
 ╭─${VENV}%F{green}%n%f %B%F{blue}%~%f%b ${BRANCH}
 ╰─➤ "
-
-# Put all your local configuration that shouldn't be publicly version
-# controlled into here
-export LOCAL_ZSHRC="$HOME/.local_zshrc"
-if [[ -f $LOCAL_ZSHRC ]]; then
-  source $LOCAL_ZSHRC
-fi
+# Put the clock on the right side of the prompt
+_lineup=$'\e[1A'
+_linedown=$'\e[1B'
+RPROMPT="%{${_lineup}%}%*%{${_linedown}%}"
 
 # Use neovim everywhere
 export EDITOR='nvim'
@@ -142,7 +146,7 @@ alias gcem='git checkout master'
 alias gceu='git checkout @{upstream}'
 alias gdm='git diff master'
 alias gdmno='git diff master --name-only'
-alias gdem='gd external/monorepo'
+alias gds='git diff --staged'
 alias gca='git commit --amend'
 alias gcane='git commit --amend --no-edit'
 alias gsuc='git submodule update --checkout'
@@ -154,15 +158,42 @@ alias gsa='git stash apply'
 alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
-alias gbd='git branch -vv | grep -P "(?<=\[)$(git branch --show-current)"'
-alias gbg='git branch -vv | grep gone'
+alias gbb='gb | grep "^\*"'
+alias gbd='gb | grep -P "(?<=\[)$(git branch --show-current)"'
+alias gbg='gb | grep gone'
 alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 
+function gbp() {
+  # Displays previous git branches.
+  #
+  # Optional argument is the number of branches to display. Defaults to 5,
+  # meaning just the last branch.
+
+  # Parse args if present, otherwise default number of branches
+  if [[ $# -lt 1 ]]; then
+    num_branches=5
+  else
+    num_branches=$1
+  fi
+
+  for ((ii = 1; ii <= num_branches; ii++)); do
+    local hash="$(git rev-parse @{-$ii})"
+    local branch="$(git describe --all $hash)"
+    echo "$ii: $branch"
+  done
+}
+
+function gcep() {
+  # Checks out a previous branch
+  #
+  # Argument is how many branches to go backwards. Branch numbering can be
+  # checked with gbp
+  git checkout @{$1}
+}
+
 # Zellij aliases
 alias zj='zellij'
-alias za='zj attach'
-alias zls='zj list-sessions'
 
 # Always use python 3
 alias python='python3'
@@ -172,3 +203,14 @@ source "$HOME/.cargo/env"
 
 # Added for golang
 export PATH=$PATH:/usr/local/go/bin
+
+# TODO Unleash the power of zoxide
+# eval "$(zoxide init zsh)"
+# alias cd='z'
+
+# Put all your local configuration that shouldn't be publicly version
+# controlled into here
+export LOCAL_ZSHRC="$HOME/.local_zshrc"
+if [[ -f $LOCAL_ZSHRC ]]; then
+  source $LOCAL_ZSHRC
+fi
