@@ -44,6 +44,21 @@ cmake \
 wl-clipboard \
 stow \
 
+function install_lazygit() {
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  LAZYGIT_TAR="lazygit.tar.gz"
+  cd /tmp
+  curl -Lo $LAZYGIT_TAR "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf $LAZYGIT_TAR lazygit
+  sudo install lazygit /usr/local/bin
+  rm $LAZYGIT_TAR lazygit
+}
+if [[ $(command -v lazygit) ]]; then
+  echo "lazygit already installed"
+else
+  install_lazygit
+fi
+
 ###############################################################################
 print_header "Installing shell"
 

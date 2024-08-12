@@ -113,6 +113,7 @@ end
 highlight_like('*.sim', 'yaml')
 highlight_like('*.prototxt', 'yaml')
 highlight_like('BUILD.pants', 'python')
+highlight_like('.local_zshrc', 'zsh')
 
 -- Explicitly set the comment string for certain uncommon filetypes
 local set_commentstring = function(filetype, commentstring)
@@ -170,3 +171,6 @@ keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
 
 -- Command to split newline delimited raw strings
 vim.api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
+
+-- Keybinding to open lazygit
+keymap.set('n', '<leader>gg', ':LazyGit<cr>', noremap)
