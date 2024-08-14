@@ -15,7 +15,7 @@ require('lualine').setup({
       {
         'diagnostics',
         sources = {
-          'nvim_diagnostic',
+          -- 'nvim_diagnostic', Seems to raise the same errors as nvim_lsp
           'nvim_lsp',
         },
       },

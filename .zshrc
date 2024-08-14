@@ -163,6 +163,7 @@ alias gbd='gb | grep -P "(?<=\[)$(git branch --show-current)"'
 alias gbg='gb | grep gone'
 alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
+alias lg='lazygit'
 
 function gbp() {
   # Displays previous git branches.

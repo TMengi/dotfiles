@@ -88,7 +88,7 @@ end, silent_noremap)
 -- Set the filetype for some uncommon extensions
 local buffer_events = { 'BufNewFile', 'BufEnter', 'BufRead' }
 local filetype_like = function(pattern, desired_filetype)
-  -- Sets the filetype for ``patern`` files to be ``desired_filetype``
+  -- Sets the filetype for ``pattern`` files to be ``desired_filetype``
   api.nvim_create_autocmd(buffer_events, {
     pattern = pattern,
     callback = function()
@@ -99,6 +99,7 @@ end
 filetype_like('BUILD.pants', 'pants')
 filetype_like('*.script', 'matlab') -- Pretend GMAT scripts are matlab
 filetype_like('*.prototxt', 'prototxt')
+filetype_like('*.sim', 'yaml')
 
 -- Explicitly set syntax for certain uncommon filetypes
 local highlight_like = function(pattern, desired_syntax)
@@ -110,7 +111,6 @@ local highlight_like = function(pattern, desired_syntax)
     end,
   })
 end
-highlight_like('*.sim', 'yaml')
 highlight_like('*.prototxt', 'yaml')
 highlight_like('BUILD.pants', 'python')
 highlight_like('.local_zshrc', 'zsh')
@@ -171,6 +171,9 @@ keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
 
 -- Command to split newline delimited raw strings
 vim.api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
+
+-- Command to print the outline of a python file
+vim.api.nvim_create_user_command('PyOutline', [[g/\v^(class|def)/p]], {})
 
 -- Keybinding to open lazygit
 keymap.set('n', '<leader>gg', ':LazyGit<cr>', noremap)
