@@ -10,3 +10,6 @@ stow.sh
 # Folder for applications files that can't be stowed directly since they are
 # not under the home tree
 applications
+
+# Repos that we clone for various things
+diff-so-fancy

@@ -59,6 +59,20 @@ else
   install_lazygit
 fi
 
+function install_diffsofancy() {
+  CWD=$(pwd)
+  git clone https://github.com/so-fancy/diff-so-fancy.git
+  chmod +x "diff-so-fancy/diff-so-fancy"
+  cd /usr/local/bin
+  echo "linking $CWD/diff-so-fancy/diff-so-fancy"
+  sudo ln -s "$CWD/diff-so-fancy/diff-so-fancy"
+}
+if [[ $(command -v diff-so-fancy) ]]; then
+  echo "diff-so-fancy already installed"
+else
+  install_diffsofancy
+fi
+
 ###############################################################################
 print_header "Installing shell"
 
