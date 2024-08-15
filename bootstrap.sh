@@ -52,6 +52,11 @@ function install_lazygit() {
   tar xf $LAZYGIT_TAR lazygit
   sudo install lazygit /usr/local/bin
   rm $LAZYGIT_TAR lazygit
+  # Remove the default config because we will use our own
+  LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
+  if [[ -e $LAZYGIT_CONFIG ]]; then
+    rm $LAZYGIT_CONFIG
+  fi
 }
 if [[ $(command -v lazygit) ]]; then
   echo "lazygit already installed"
