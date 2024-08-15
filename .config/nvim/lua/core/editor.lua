@@ -176,4 +176,4 @@ vim.api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
 vim.api.nvim_create_user_command('PyOutline', [[g/\v^(class|def)/p]], {})
 
 -- Keybinding to open lazygit
-keymap.set('n', '<leader>gg', ':LazyGit<cr>', noremap)
+keymap.set('n', '<leader>gg', ':LazyGit<cr>', silent_noremap)
