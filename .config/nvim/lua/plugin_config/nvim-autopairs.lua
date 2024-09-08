@@ -20,3 +20,11 @@ autopairs.add_rules({
     -- Don't split pair onto multiple lines with carriage return
     :with_cr(cond.none())
 })
+
+autopairs.add_rules({
+  Rule('|', '|', 'rust')
+    -- Move cursor right when completing the pair
+    :with_move(cond.done())
+    -- Don't split pair onto multiple lines with carriage return
+    :with_cr(cond.none())
+})
