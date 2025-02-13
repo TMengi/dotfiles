@@ -9,7 +9,7 @@ require('mason-lspconfig').setup({
     'pyright@1.1.259',
     'rust_analyzer',
     'clangd',
-    'bufls',
+    'buf_ls',
     'yamlls',
     'jsonls',
     'remark_ls',
@@ -93,7 +93,7 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
-lspconfig.bufls.setup({ on_attach = on_attach_global, capabilities = capabilities })
+lspconfig.buf_ls.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.yamlls.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.jsonls.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.remark_ls.setup({ on_attach = on_attach_global, capabilities = capabilities })
