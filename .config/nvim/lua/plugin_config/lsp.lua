@@ -101,7 +101,7 @@ lspconfig.clangd.setup({
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   on_attach = function()
     on_attach_global()
-    keymap.set('n', '<leader>o', ':ClangdSwitchSourceHeader<cr>')
+    keymap.set('n', '<leader>oo', ':ClangdSwitchSourceHeader<cr>')
   end,
   capabilities = capabilities,
 })
