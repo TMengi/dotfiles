@@ -14,9 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- Colorschemes,
-  'ellisonleao/gruvbox.nvim',
-  'catppuccin/nvim',
+  'catppuccin/nvim', -- Colorschemes,
 
   'nvim-tree/nvim-tree.lua', -- File tree
   {
