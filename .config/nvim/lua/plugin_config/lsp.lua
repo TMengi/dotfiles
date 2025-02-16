@@ -5,14 +5,14 @@ local lsp = vim.lsp
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
+    'buf_ls',
+    'clangd',
+    'jsonls',
     'lua_ls',
+    'markdown_oxide',
     'pyright@1.1.259',
     'rust_analyzer',
-    'clangd',
-    'buf_ls',
     'yamlls',
-    'jsonls',
-    'remark_ls',
   },
 })
 
@@ -96,7 +96,7 @@ lspconfig.rust_analyzer.setup({
 lspconfig.buf_ls.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.yamlls.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.jsonls.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.remark_ls.setup({ on_attach = on_attach_global, capabilities = capabilities })
+lspconfig.markdown_oxide.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.clangd.setup({
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   on_attach = function()

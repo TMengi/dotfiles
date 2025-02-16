@@ -2,6 +2,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'cpp',
     'lua',
+    'markdown',
     'python',
     'rust',
     'vim',

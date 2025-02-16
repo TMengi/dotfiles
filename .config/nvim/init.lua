@@ -8,6 +8,10 @@
 --   - [x] rust
 -- [ ] LSP for C++
 -- [ ] faster telescope sorting (there are recommendations on the github page)
+-- [ ] better markdown support
+--   - [x] treesitter highlighting
+--   - [x] lsp
+--   - [ ] previewer?
 
 local g = vim.g
 
