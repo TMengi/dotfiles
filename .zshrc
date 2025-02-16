@@ -205,9 +205,9 @@ source "$HOME/.cargo/env"
 # Added for golang
 export PATH=$PATH:/usr/local/go/bin
 
-# TODO Unleash the power of zoxide
-# eval "$(zoxide init zsh)"
-# alias cd='z'
+# Unleash the power of zoxide
+eval "$(zoxide init zsh)"
+alias cd='z'
 
 # Put all your local configuration that shouldn't be publicly version
 # controlled into here

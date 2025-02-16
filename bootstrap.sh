@@ -146,5 +146,7 @@ cargo install alacritty
 
 cargo install zellij
 
+cargo install zoxide
+
 ###############################################################################
 print_header "Boostrap complete!"
