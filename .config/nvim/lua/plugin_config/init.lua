@@ -4,19 +4,20 @@
 local config_dir = 'plugin_config'
 local plugin_names = {
   'colorscheme',
+  'comment',
+  'formatter',
+  'indentline',
+  'lazygit',
+  'leap',
+  'lsp',
   'lualine',
+  'nvim-autopairs',
+  'nvim-cmp',
   'nvim-tree',
   'nvim-treesitter',
-  'telescope',
-  'nvim-cmp',
-  'lsp',
-  'nvim-autopairs',
-  'leap',
-  'indentline',
-  'comment',
-  'vim-gitgutter',
-  'formatter',
   'rust-tools',
+  'telescope',
+  'vim-gitgutter',
 }
 
 for _, name in pairs(plugin_names) do

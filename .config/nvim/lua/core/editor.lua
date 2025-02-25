@@ -179,6 +179,3 @@ vim.api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
 
 -- Command to print the outline of a python file
 vim.api.nvim_create_user_command('PyOutline', [[g/\v^\s{,4}(class|def)/p]], {})
-
--- Keybinding to open lazygit
-keymap.set('n', '<leader>gg', ':LazyGit<cr>', silent_noremap)
