@@ -134,8 +134,13 @@ keymap.set('n', '<leader>*', 'viwy/<up>\\|\\<<c-r>0\\><cr>', silent_noremap)
 -- Github view macro
 keymap.set('n', '<leader>v', ':!gv %<cr>')
 
--- Don't autowrap text
-opt.formatoptions:remove({ 't' })
+-- Set commenting format options. Should be able to do this once with
+-- ops.formatoptions:remove({ 'tcro' }), but it seems like they get reset on
+-- each file open event.
+api.nvim_create_autocmd('FileType', {
+  desc = 'Remote format options',
+  command = 'set formatoptions-=cro',
+})
 
 -- Search for merge conflicts
 keymap.set('n', '<leader>cf', '/<<<<<<<\\|=======\\|>>>>>>><cr>', { noremap = true })
