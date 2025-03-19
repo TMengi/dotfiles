@@ -139,7 +139,7 @@ keymap.set('n', '<leader>v', ':!gv %<cr>')
 -- each file open event.
 api.nvim_create_autocmd('FileType', {
   desc = 'Remote format options',
-  command = 'set formatoptions-=cro',
+  command = 'set formatoptions=rqj',
 })
 
 -- Search for merge conflicts
