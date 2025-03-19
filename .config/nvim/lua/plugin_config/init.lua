@@ -12,6 +12,7 @@ local plugin_names = {
   'leap',
   'lsp',
   'lualine',
+  'noice',
   'nvim-autopairs',
   'nvim-cmp',
   'nvim-tree',

@@ -58,9 +58,6 @@ api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Make the cmd window taller for displaying errors
-opt.cmdheight = 2
-
 -- Always show the signcolumn, otherwise it shifts the text each time
 -- diagnostics appear or become resolved
 opt.signcolumn = 'yes'
