@@ -6,6 +6,7 @@ local plugin_names = {
   'colorscheme',
   'comment',
   'formatter',
+  'git-blame',
   'indentline',
   'lazygit',
   'leap',

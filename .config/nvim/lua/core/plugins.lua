@@ -77,4 +77,5 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
     },
   },
+  'f-person/git-blame.nvim',
 })
