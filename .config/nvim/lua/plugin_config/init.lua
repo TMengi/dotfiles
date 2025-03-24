@@ -15,6 +15,7 @@ local plugin_names = {
   'noice',
   'nvim-autopairs',
   'nvim-cmp',
+  'nvim-surround',
   'nvim-tree',
   'nvim-treesitter',
   'rust-tools',

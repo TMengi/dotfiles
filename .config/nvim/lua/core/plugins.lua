@@ -85,4 +85,5 @@ require('lazy').setup({
       'rcarriga/nvim-notify',
     },
   },
+  'kylechui/nvim-surround',
 })
