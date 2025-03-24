@@ -1,17 +1,11 @@
 -- My conquest begins to reconfigure nvim in lua from scratch
 
 -- TODO
--- [ ] Code formatting
---   - [x] lua
---   - [x] python
---   - [ ] C++
---   - [x] rust
--- [ ] LSP for C++
--- [ ] faster telescope sorting (there are recommendations on the github page)
 -- [ ] better markdown support
 --   - [x] treesitter highlighting
 --   - [x] lsp
 --   - [ ] previewer?
+-- [ ] Check out configuration options for noice.lua
 
 local g = vim.g
 
