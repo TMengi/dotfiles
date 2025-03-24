@@ -1,3 +1,5 @@
+local keymap = vim.keymap
+
 require('noice').setup({
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -10,3 +12,5 @@ require('noice').setup({
   -- TODO: Check out configuration options
   presets = {},
 })
+
+keymap.set('n', '<leader>na', ':NoiceAll<cr>', { silent = true, noremap = true })
