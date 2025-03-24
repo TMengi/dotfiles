@@ -11,8 +11,11 @@ require('formatter').setup({
     lua = {
       require('formatter.filetypes.lua').stylua,
     },
+    -- python = {
+    --   require('formatter.filetypes.python').yapf,
+    -- },
     python = {
-      require('formatter.filetypes.python').yapf,
+      require('formatter.filetypes.python').ruff,
     },
     rust = {
       require('formatter.filetypes.rust').rustfmt,

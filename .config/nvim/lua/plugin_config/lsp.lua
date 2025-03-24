@@ -11,6 +11,7 @@ require('mason-lspconfig').setup({
     'lua_ls',
     'markdown_oxide',
     'pyright@1.1.259',
+    'ruff',
     'rust_analyzer',
     'yamlls',
   },
@@ -53,7 +54,6 @@ lspconfig.pyright.setup({
   capabilities = capabilities,
   on_attach = function(_, _)
     on_attach_global()
-    -- keymap.set('n', '<leader>i', ':PyrightOrganizeImports<cr>')
     -- Custom isort configuration that works like Astranis linters
     local command = [[
       :!isort %
