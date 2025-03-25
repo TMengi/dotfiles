@@ -13,4 +13,6 @@ require('noice').setup({
   presets = {},
 })
 
-keymap.set('n', '<leader>na', ':NoiceAll<cr>', { silent = true, noremap = true })
+local silent_noremap = { silent = true, noremap = true }
+keymap.set('n', '<leader>na', ':NoiceAll<cr>', silent_noremap)
+keymap.set('n', '<leader>np', ':NoicePick<cr>', silent_noremap)
