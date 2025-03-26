@@ -175,7 +175,12 @@ keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
 api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
 
 -- Command to print the outline of a python file
-api.nvim_create_user_command('PyOutline', [[g/\v^\s{,4}(class|def)/p]], {})
+api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    api.nvim_create_user_command('PyOutline', [[g/\v^\s{,4}(class|def)/p]], {})
+  end,
+})
 
 -- Checkmark toggling in markdown files
 local markdown_toggle_check = function()
