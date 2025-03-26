@@ -182,6 +182,12 @@ api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Command to open the pyrightconfig
+api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  command = 'map <leader>y :tabnew pyrightconfig.json<cr>',
+})
+
 -- Checkmark toggling in markdown files
 local markdown_toggle_check = function()
   local row, _ = unpack(api.nvim_win_get_cursor(0))
