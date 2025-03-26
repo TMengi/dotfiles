@@ -129,7 +129,7 @@ set_commentstring('kdl', '//')
 keymap.set('n', '<leader>*', 'viwy/<up>\\|\\<<c-r>0\\><cr>', silent_noremap)
 
 -- Github view macro
-keymap.set('n', '<leader>v', ':!gv %<cr>')
+keymap.set('n', '<leader>v', ':!gv %<cr>', silent_noremap)
 
 -- Set commenting format options. Should be able to do this once with
 -- ops.formatoptions:remove({ 'tcro' }), but it seems like they get reset on
