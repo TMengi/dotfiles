@@ -14,4 +14,5 @@ g.maplocalleader = ' '
 
 require('core.editor')
 require('core.plugins')
+require('filetype_config')
 require('plugin_config')
