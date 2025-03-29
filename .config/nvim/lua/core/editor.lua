@@ -213,3 +213,6 @@ api.nvim_create_autocmd('FileType', {
     keymap.set('n', '<leader>ll', ':MarkdownToggleCheck<cr>', silent_noremap)
   end,
 })
+
+-- Sort selected lines
+keymap.set('v', '<leader>s', ":sort<cr>", silent_noremap)
