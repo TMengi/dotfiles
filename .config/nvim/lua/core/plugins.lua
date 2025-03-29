@@ -1,5 +1,6 @@
--- Bootstraps the plugin manager
+-- Bootstraps the plugin manager and declares plugins to load
 
+-- Enforce lazy.nvim installation
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -13,57 +14,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Plugins to include
 require('lazy').setup({
-  'catppuccin/nvim', -- Colorschemes,
+  -- Colorschemes,
+  'catppuccin/nvim',
 
-  'nvim-tree/nvim-tree.lua', -- File tree
-  {
-    'nvim-lualine/lualine.nvim', -- Status line
-    dependencies = {
-      'nvim-tree/nvim-web-devicons', -- Icons for status line and file tree
-    },
-  },
-  'nvim-treesitter/nvim-treesitter',
-  {
-    'nvim-telescope/telescope.nvim', -- Fuzzy find and other things
-    tag = '0.1.4',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-  },
-  {
-    'williamboman/mason.nvim', -- Language servers
-    dependencies = {
-      'williamboman/mason-lspconfig.nvim', -- Interface to lspconfig
-      'neovim/nvim-lspconfig', -- Quickstarts for lspconfig
-    },
-  },
-  'windwp/nvim-autopairs',
+  -- Editor niceties
+  'windwp/nvim-autopairs', -- Automatically add surround mark pairs
+  'kylechui/nvim-surround', -- Surround mark manager
   'ggandor/leap.nvim', -- Quick buffer navigation
   'Yggdroot/indentLine', -- Nice indentation formatting
   'numToStr/comment.nvim', -- Quick commenter
-  'airblade/vim-gitgutter',
-  {
-    'hrsh7th/nvim-cmp', -- Completions...
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp', --
-      'hrsh7th/cmp-buffer', -- From buffers
-      'hrsh7th/cmp-path', -- From filetree
-      'hrsh7th/cmp-cmdline', -- From command line
-      'hrsh7th/cmp-vsnip', -- Snippet engine
-      'hrsh7th/vim-vsnip', --
-      'hrsh7th/cmp-nvim-lsp-signature-help', -- Function signature completion
-    },
-  },
+  'nvim-tree/nvim-tree.lua', -- File tree
   'mhartington/formatter.nvim',
-  {
-    'simrat39/rust-tools.nvim',
-    dependencies = {
-      'mfussenegger/nvim-dap',
-      'nvim-neotest/nvim-nio',
-      'rcarriga/nvim-dap-ui',
-    },
-  },
+
+  -- Git integrations
+  'airblade/vim-gitgutter', -- Modifiation marks in the numcol
+  'f-person/git-blame.nvim', -- Blame
   {
     'kdheepak/lazygit.nvim',
     cmd = {
@@ -77,13 +44,62 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
     },
   },
-  'f-person/git-blame.nvim',
+
+  -- Language servers, completions, syntax highlighting
   {
-    'folke/noice.nvim',
+    'williamboman/mason.nvim',
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim', -- Interface to lspconfig
+      'neovim/nvim-lspconfig', -- Quickstarts for lspconfig
+    },
+  },
+  {
+    'hrsh7th/nvim-cmp', -- Completions...
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp', --
+      'hrsh7th/cmp-buffer', -- From buffers
+      'hrsh7th/cmp-path', -- From filetree
+      'hrsh7th/cmp-cmdline', -- From command line
+      'hrsh7th/cmp-vsnip', -- Snippet engine
+      'hrsh7th/vim-vsnip', --
+      'hrsh7th/cmp-nvim-lsp-signature-help', -- Function signature completion
+    },
+  },
+  'nvim-treesitter/nvim-treesitter', -- Concrete syntax tree, highlighting, etc.
+
+  -- Status line
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons', -- Icons for status line and file tree
+    },
+  },
+
+  -- Telescope picker
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.4',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  },
+
+  -- Notification and log handler
+  {
+    'folke/noice.nvim', 
     dependencies = {
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',
     },
   },
-  'kylechui/nvim-surround',
+
+  -- Rust specific
+  {
+    'simrat39/rust-tools.nvim',
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'nvim-neotest/nvim-nio',
+      'rcarriga/nvim-dap-ui',
+    },
+  },
 })
