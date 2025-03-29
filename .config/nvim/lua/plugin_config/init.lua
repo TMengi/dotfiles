@@ -6,6 +6,7 @@ local plugin_names = {
   'formatter',
   'git-blame',
   'indentline',
+  'lazydev',
   'lazygit',
   'leap',
   'lsp',
