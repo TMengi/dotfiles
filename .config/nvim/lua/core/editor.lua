@@ -49,20 +49,12 @@ opt.number = true
 -- Line length and rulers
 opt.textwidth = 79
 opt.colorcolumn = '80,120'
-api.nvim_create_autocmd('FileType', {
-  desc = 'Rust allows longer line lengths',
-  pattern = 'rust',
-  callback = function()
-    opt_local.textwidth = 99
-    opt_local.colorcolumn = '100'
-  end,
-})
 
 -- Always show the signcolumn, otherwise it shifts the text each time
 -- diagnostics appear or become resolved
 opt.signcolumn = 'yes'
 
--- Inderline cursor line in insert mode
+-- Underline cursor line in insert mode
 api.nvim_create_autocmd({ 'InsertEnter' }, {
   callback = function()
     opt.cul = true
@@ -84,10 +76,10 @@ end, silent_noremap)
 
 -- Set the filetype for some uncommon extensions
 local buffer_events = { 'BufNewFile', 'BufEnter', 'BufRead' }
-local filetype_like = function(pattern, desired_filetype)
-  -- Sets the filetype for ``pattern`` files to be ``desired_filetype``
+local filetype_like = function(file_pattern, desired_filetype)
+  -- Sets the filetype for ``file_pattern`` files to be ``desired_filetype``
   api.nvim_create_autocmd(buffer_events, {
-    pattern = pattern,
+    pattern = file_pattern,
     callback = function()
       opt_local.filetype = desired_filetype
     end,
@@ -173,47 +165,6 @@ keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
 
 -- Command to split newline delimited raw strings
 api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
-
--- Command to print the outline of a python file
-api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function()
-    api.nvim_create_user_command('PyOutline', [[g/\v^\s{,4}(class|def)/p]], {})
-  end,
-})
-
--- Command to open the pyrightconfig
-api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  command = 'map <leader>y :tabnew pyrightconfig.json<cr>',
-})
-
--- Checkmark toggling in markdown files
-local markdown_toggle_check = function()
-  local row, _ = unpack(api.nvim_win_get_cursor(0))
-  local current_line = api.nvim_get_current_line()
-  local new_line = ''
-  -- TODO: Try to clean this up
-  if string.find(current_line, '^%s*- %[ %]') then
-    new_line = string.gsub(current_line, '%[ %]', '[x]', 1)
-  elseif string.find(current_line, '^%s*- %[x%]') then
-    new_line = string.gsub(current_line, '%[x%]', '[ ]', 1)
-  elseif string.find(current_line, '^%s*- ') then
-    new_line = string.gsub(current_line, '- ', '- [ ] ', 1)
-  else
-    local i, j = string.find(current_line, '^%s*')
-    assert(i ~= nil)
-    new_line = string.sub(current_line, i, j) .. string.gsub(current_line, '^%s*', '- [ ] ')
-  end
-  api.nvim_buf_set_lines(0, row - 1, row, true, { new_line })
-end
-api.nvim_create_autocmd('FileType', {
-  pattern = 'markdown',
-  callback = function()
-    api.nvim_create_user_command('MarkdownToggleCheck', markdown_toggle_check, {})
-    keymap.set('n', '<leader>ll', ':MarkdownToggleCheck<cr>', silent_noremap)
-  end,
-})
 
 -- Sort selected lines
 keymap.set('v', '<leader>s', ":sort<cr>", silent_noremap)
