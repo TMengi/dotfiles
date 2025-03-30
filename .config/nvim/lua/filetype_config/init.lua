@@ -2,6 +2,7 @@
 
 local config_dir = 'filetype_config'
 local languages = {
+  'configure_filetypes',
   'markdown',
   'python',
   'rust',
