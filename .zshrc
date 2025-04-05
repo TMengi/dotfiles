@@ -117,6 +117,13 @@ export VISUAL=$EDITOR
 alias vim=$EDITOR
 alias nvc='cd ~/.config/nvim'
 
+# Quick edit shell configs
+alias zshrc="$EDITOR ~/.zshrc"
+# Put all your local configuration that shouldn't be publicly version
+# controlled into here
+export LOCAL_ZSHRC="$HOME/.local_zshrc"
+alias lzshrc="$EDITOR $LOCAL_ZSHRC"
+
 alias ll='ls -lahF'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -209,9 +216,6 @@ export PATH=$PATH:/usr/local/go/bin
 eval "$(zoxide init zsh)"
 alias cd='z'
 
-# Put all your local configuration that shouldn't be publicly version
-# controlled into here
-export LOCAL_ZSHRC="$HOME/.local_zshrc"
 if [[ -f $LOCAL_ZSHRC ]]; then
   source $LOCAL_ZSHRC
 fi
