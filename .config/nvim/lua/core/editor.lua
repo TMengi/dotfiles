@@ -25,6 +25,15 @@ api.nvim_create_autocmd('FileType', {
   pattern = { 'python', 'rust', 'markdown', 'pants', 'matlab', 'bzl' },
   callback = four_spaces,
 })
+-- This might not actually be necessary since you're never editing a man page
+api.nvim_create_autocmd('FileType', {
+  desc = 'man pages have really weird spacing',
+  pattern = { 'man' },
+  callback = function()
+    opt_local.tabstop = 7
+    opt_local.shiftwidth = 7
+  end,
+})
 
 -- Search and highlighting
 opt.smartcase = true

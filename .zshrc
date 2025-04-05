@@ -116,6 +116,7 @@ export EDITOR='nvim'
 export VISUAL=$EDITOR
 alias vim=$EDITOR
 alias nvc='cd ~/.config/nvim'
+export MANPAGER="$EDITOR +Man!"
 
 # Quick edit shell configs
 alias zshrc="$EDITOR ~/.zshrc"
