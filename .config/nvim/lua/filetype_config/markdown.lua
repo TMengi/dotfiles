@@ -11,8 +11,8 @@ local markdown_toggle_check = function()
     new_line = string.gsub(current_line, '%[ %]', '[x]', 1)
   elseif string.find(current_line, '^%s*- %[x%]') then
     new_line = string.gsub(current_line, '%[x%]', '[ ]', 1)
-  elseif string.find(current_line, '^%s*- ') then
-    new_line = string.gsub(current_line, '- ', '- [ ] ', 1)
+  elseif string.find(current_line, '^%s*-%s*') then
+    new_line = string.gsub(current_line, '-%s*', '- [ ] ', 1)
   else
     local i, j = string.find(current_line, '^%s*')
     assert(i ~= nil)
