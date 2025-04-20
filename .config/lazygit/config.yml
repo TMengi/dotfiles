@@ -3,4 +3,5 @@ git:
     colorArg: always
     pager: diff-so-fancy
   autoFetch: false
-
+# Use exit with esc key instead of ctrl-c
+quitOnTopLevelReturn: true
