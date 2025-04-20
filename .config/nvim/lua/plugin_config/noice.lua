@@ -10,7 +10,9 @@ require('noice').setup({
     },
   },
   -- TODO: Check out configuration options
-  presets = {},
+  presets = {
+    lsp_doc_border = true,
+  },
 })
 
 local silent_noremap = { silent = true, noremap = true }
