@@ -13,7 +13,6 @@ keybinds clear-defaults=true {
     }
 
     resize {
-        bind "Ctrl w" { SwitchToMode "Normal"; }
         bind "h" "Left" { Resize "Increase Left"; }
         bind "j" "Down" { Resize "Increase Down"; }
         bind "k" "Up" { Resize "Increase Up"; }
@@ -26,7 +25,6 @@ keybinds clear-defaults=true {
         bind "-" { Resize "Decrease"; }
     }
     shared_except "resize" "locked" {
-        bind "Ctrl w" { SwitchToMode "Resize"; }
     }
 
     pane {
