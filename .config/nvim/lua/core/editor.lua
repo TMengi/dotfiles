@@ -6,6 +6,7 @@ local keymap = vim.keymap
 local opt = vim.opt
 local opt_local = vim.opt_local
 
+local noremap = { noremap = true }
 local silent_noremap = { silent = true, noremap = true }
 
 -- ============================================================================
@@ -111,15 +112,14 @@ keymap.set('n', '<leader>*', 'viwy/<up>\\|\\<<c-r>0\\><cr>', silent_noremap)
 keymap.set('n', '<leader>v', ':!gv %<cr>', silent_noremap)
 
 -- Search for git merge conflicts
-keymap.set('n', '<leader>cf', '/<<<<<<<\\|=======\\|>>>>>>><cr>', { noremap = true })
+keymap.set('n', '<leader>cf', '/<<<<<<<\\|=======\\|>>>>>>><cr>', noremap)
 
 -- Quickfix list shortcuts
-local noremap = { noremap = true }
-keymap.set('n', '<leader>co', ':copen<cr>', noremap)
-keymap.set('n', '<leader>cc', ':cclose<cr>', noremap)
-keymap.set('n', ']q', ':cnext<cr>', noremap)
-keymap.set('n', '[q', ':cprev<cr>', noremap)
-keymap.set('n', '<leader>cq', ':call setqflist([])<cr>', noremap)
+keymap.set('n', '<leader>co', ':copen<cr>', silent_noremap)
+keymap.set('n', '<leader>cc', ':cclose<cr>', silent_noremap)
+keymap.set('n', ']q', ':cnext<cr>', silent_noremap)
+keymap.set('n', '[q', ':cprev<cr>', silent_noremap)
+keymap.set('n', '<leader>cq', ':call setqflist([])<cr>', silent_noremap)
 -- Functions and keymaps to open all quickfix items in various splits
 local qfopen_wrapper = function(...)
   local qfopen = function(cmd)
