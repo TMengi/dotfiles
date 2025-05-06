@@ -17,6 +17,7 @@ local plugin_names = {
   'nvim-surround',
   'nvim-tree',
   'nvim-treesitter',
+  'qftools',
   'rust-tools',
   'telescope',
   'vim-gitgutter',

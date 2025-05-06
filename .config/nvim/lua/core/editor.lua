@@ -114,28 +114,6 @@ keymap.set('n', '<leader>v', ':!gv %<cr>', silent_noremap)
 -- Search for git merge conflicts
 keymap.set('n', '<leader>cf', '/<<<<<<<\\|=======\\|>>>>>>><cr>', noremap)
 
--- Quickfix list shortcuts
-keymap.set('n', '<leader>co', ':copen<cr>', silent_noremap)
-keymap.set('n', '<leader>cc', ':cclose<cr>', silent_noremap)
-keymap.set('n', ']q', ':cnext<cr>', silent_noremap)
-keymap.set('n', '[q', ':cprev<cr>', silent_noremap)
-keymap.set('n', '<leader>cq', ':call setqflist([])<cr>', silent_noremap)
--- Functions and keymaps to open all quickfix items in various splits
-local qfopen_wrapper = function(...)
-  local qfopen = function(cmd)
-    vim.cmd.cfdo('silent ' .. cmd .. ' %')
-    vim.cmd.quit()
-  end
-  local args = { ... }
-  return function()
-    qfopen(unpack(args))
-    vim.cmd.cclose()
-  end
-end
-keymap.set('n', '<leader>os', qfopen_wrapper('sp'), noremap)
-keymap.set('n', '<leader>ov', qfopen_wrapper('vs'), noremap)
-keymap.set('n', '<leader>ot', qfopen_wrapper('tabnew'), noremap)
-
 -- Command to split newline delimited raw strings
 api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
 

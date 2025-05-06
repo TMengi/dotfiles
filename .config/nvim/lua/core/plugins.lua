@@ -117,4 +117,7 @@ require('lazy').setup({
       })
     end,
   },
+
+  -- My plugins
+  dir = 'my_plugins/qftools',
 })
