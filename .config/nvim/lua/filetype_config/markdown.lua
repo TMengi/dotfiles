@@ -24,6 +24,6 @@ api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function()
     api.nvim_create_user_command('MarkdownToggleCheck', markdown_toggle_check, {})
-    keymap.set('n', '<leader>ll', ':MarkdownToggleCheck<cr>', { silent = true, noremap = true })
+    keymap.set('n', '<leader>ll', ':MarkdownToggleCheck<cr>', { silent = true, noremap = true, buffer = true })
   end,
 })
