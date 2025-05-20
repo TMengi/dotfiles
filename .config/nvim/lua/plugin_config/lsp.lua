@@ -50,38 +50,7 @@ lspconfig.lua_ls.setup({
     },
   },
 })
-lspconfig.pyright.setup({
-  capabilities = capabilities,
-  on_attach = function(_, _)
-    on_attach_global()
-    -- Custom isort configuration that works like Astranis linters
-    local command = [[
-      :!isort %
-      --force-single-line-imports
-      --force-sort-within-sections
-      --force-alphabetical-sort-within-sections
-      --use-parentheses
-      -p astranis
-      -p ops
-      -p gnc_python
-      -p network_sw
-      -p sk
-      -p sw
-      --single-line-exclusions collections.abc
-      --single-line-exclusions typing
-      --single-line-exclusions typing_extensions
-      --single-line-exclusions pants.core.goals.package
-      --single-line-exclusions pants.core.goals.publish
-      --single-line-exclusions pants.core.util_rules.external_tool
-      --single-line-exclusions pants.engine.environment
-      --single-line-exclusions pants.engine.fs
-      --single-line-exclusions pants.engine.process
-      --single-line-exclusions pants.engine.rules
-    ]]
-    command = command:gsub('\n', '') .. '<cr><cr>'
-    keymap.set('n', '<leader>i', command, { silent = true })
-  end,
-})
+lspconfig.pyright.setup({ on_attach = on_attach_global, capabilities = capabilities })
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach_global,
   capabilities = capabilities,
