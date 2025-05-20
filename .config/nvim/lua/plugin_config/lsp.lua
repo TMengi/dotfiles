@@ -2,7 +2,7 @@ local diagnostic = vim.diagnostic
 local keymap = vim.keymap
 local lsp = vim.lsp
 
-require('mason').setup()
+-- Mason core is automatically setup by lspconfig
 require('mason-lspconfig').setup({
   ensure_installed = {
     'buf_ls',

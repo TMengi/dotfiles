@@ -47,9 +47,9 @@ require('lazy').setup({
 
   -- Language servers, completions, syntax highlighting
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason-lspconfig.nvim', -- Interface to lspconfig
     dependencies = {
-      'williamboman/mason-lspconfig.nvim', -- Interface to lspconfig
+      { 'mason-org/mason.nvim', opts = {} },
       'neovim/nvim-lspconfig', -- Quickstarts for lspconfig
     },
   },
