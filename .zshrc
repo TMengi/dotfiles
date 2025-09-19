@@ -92,25 +92,6 @@ bindkey "^Xa" _expand_alias
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 zstyle ':completion:*' regular true
 
-# PS1
-function git_prompt() {
-  repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"
-  if [ -z "$repo_root" ]; then
-    branch=''
-  else
-    branch=`git branch | grep "^*" | cut -b 3-40`
-  fi
-  [[ -n "$branch" ]] && echo "%F{yellow}<$branch> %f"
-}
-BRANCH="\$(git_prompt)"
-PS1="
-╭─${VENV}%F{green}%n%f %B%F{blue}%~%f%b ${BRANCH}
-╰─➤ "
-# Put the clock on the right side of the prompt
-_lineup=$'\e[1A'
-_linedown=$'\e[1B'
-RPROMPT="%{${_lineup}%}%*%{${_linedown}%}"
-
 # Use neovim everywhere
 export EDITOR='nvim'
 export VISUAL=$EDITOR
@@ -173,6 +154,8 @@ alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 alias lg='lazygit'
 
+alias rsync='rsync -a --info=progress2'
+
 function gbp() {
   # Displays previous git branches.
   #
@@ -220,3 +203,25 @@ alias cd='z'
 if [[ -f $LOCAL_ZSHRC ]]; then
   source $LOCAL_ZSHRC
 fi
+
+# PS1
+function git_prompt() {
+  repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if [ -z "$repo_root" ]; then
+    branch=''
+  else
+    branch=`git branch | grep "^*" | cut -b 3-40`
+  fi
+  [[ -n "$branch" ]] && echo "%F{yellow}<$branch> %f"
+}
+BRANCH="\$(git_prompt)"
+if [[ $(command -v "virtualenv_info") ]]; then  # This should be defined in LOCAL_ZSHRC
+  VENV="\$(virtualenv_info)"
+fi
+PS1="
+╭─${VENV}%F{green}%n%f %B%F{blue}%~%f%b ${BRANCH}
+╰─➤ "
+# Put the clock on the right side of the prompt
+_lineup=$'\e[1A'
+_linedown=$'\e[1B'
+RPROMPT="%{${_lineup}%}%*%{${_linedown}%}"
