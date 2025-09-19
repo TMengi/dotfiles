@@ -1,12 +1,14 @@
+[terminal]
 shell = "zsh"
-
-# Colorscheme
-import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml"
-]
 
 [env]
 TERM = "xterm-256color"
 
 [font]
 size = 10
+
+[general]
+# Colorscheme
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
