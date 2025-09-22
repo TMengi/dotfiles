@@ -1,3 +1,12 @@
+--[[ LSP server configuration
+
+Steps to configure a new server:
+  - Add to the mason-lspconfig setup below
+  - Enable wit hthe vim.lsp API
+  - Configure options in the LspAttach command
+
+--]]
+local api = vim.api
 local diagnostic = vim.diagnostic
 local keymap = vim.keymap
 local lsp = vim.lsp
@@ -17,6 +26,20 @@ require('mason-lspconfig').setup({
   },
 })
 
+-- The available configurations live in
+-- ~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/configs
+lsp.enable('bash-language-server')
+lsp.enable('clangd')
+lsp.enable('jsonls')
+lsp.enable('lua_ls')
+lsp.enable('markdown_oxide')
+lsp.enable('pyright')
+lsp.enable('ruff')
+-- Commented because it's likely causing conflicts with rust-tools
+-- lsp.enable('rust_analyzer')
+lsp.enable('yamlls')
+
+-- Keymaps and settings to configure for every language server
 local on_attach_global = function(_, _)
   keymap.set('n', '<leader>rn', lsp.buf.rename)
   keymap.set('n', '<leader>ca', lsp.buf.code_action)
@@ -30,47 +53,17 @@ local on_attach_global = function(_, _)
   keymap.set('i', '<c-k>', lsp.buf.signature_help)
 end
 
--- Include completion capabilities in various LSPs
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
--- The available configurations live in
--- ~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations
--- TODO: Figure out how to pass on_attach and capabilities as an extendable
--- table to all configs
-lspconfig.lua_ls.setup({
-  on_attach = on_attach_global,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = {
-          'vim', -- Tells the LSP that the vim API is in the global namespace
-        },
-      },
-    },
-  },
-})
-lspconfig.pyright.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach_global,
-  capabilities = capabilities,
-  settings = {
-    ['rust-analyzer'] = {
-      cargo = {
-        allFeatures = true,
-      },
-    },
-  },
-})
-lspconfig.buf_ls.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.yamlls.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.jsonls.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.markdown_oxide.setup({ on_attach = on_attach_global, capabilities = capabilities })
-lspconfig.clangd.setup({
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-  on_attach = function()
+api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+
     on_attach_global()
-    keymap.set('n', '<leader>oo', ':ClangdSwitchSourceHeader<cr>', { silent = true })
+
+    if client.name == 'clangd' then
+      keymap.set('n', '<leader>oo', ':LspClangdSwitchSourceHeader<cr>', { silent = true })
+    end
   end,
-  capabilities = capabilities,
 })
