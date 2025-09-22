@@ -10,6 +10,16 @@ function print_header() {
   echo '################################################################################'
 }
 
+EXTRAS_DIR="$HOME/tools"
+if [[ ! -d $EXTRAS_DIR ]]; then
+  mkdir $EXTRAS_DIR
+fi
+cat >$EXTRAS_DIR/README.md <<EOF
+User-owned directory for extra things that need to be installed and shouldn't
+live in a privileged location
+EOF
+
+
 # DEPRECATED
 # Check if something is already installed, then install it with apt
 #
@@ -45,6 +55,7 @@ wl-clipboard \
 stow \
 
 function install_lazygit() {
+  echo "Installing lazygit with tar"
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
   LAZYGIT_TAR="lazygit.tar.gz"
   cd /tmp
@@ -65,12 +76,10 @@ else
 fi
 
 function install_diffsofancy() {
-  CWD=$(pwd)
-  git clone https://github.com/so-fancy/diff-so-fancy.git
-  chmod +x "diff-so-fancy/diff-so-fancy"
-  cd /usr/local/bin
-  echo "linking $CWD/diff-so-fancy/diff-so-fancy"
-  sudo ln -s "$CWD/diff-so-fancy/diff-so-fancy"
+  echo "Installing diff-so-fancy with git"
+  DIFF_SO_FANCY=$EXTRAS_DIR/diff-so-fancy
+  git clone https://github.com/so-fancy/diff-so-fancy.git $DIFF_SO_FANCY
+  sudo ln -s $DIFF_SO_FANCY/diff-so-fancy /usr/local/bin/
 }
 if [[ $(command -v diff-so-fancy) ]]; then
   echo "diff-so-fancy already installed"
