@@ -111,6 +111,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+alias rsync='rsync -a --info=progress2'
+alias da='deactivate'
+
 # Tmux stuff
 alias tls='tmux list-sessions'
 alias tat='tmux a -t'
@@ -153,8 +156,6 @@ alias gbg='gb | grep gone'
 alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 alias lg='lazygit'
-
-alias rsync='rsync -a --info=progress2'
 
 function gbp() {
   # Displays previous git branches.
