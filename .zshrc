@@ -81,6 +81,7 @@ setopt CSH_NULL_GLOB
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  bazel
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -91,6 +92,10 @@ source $ZSH/oh-my-zsh.sh
 bindkey "^Xa" _expand_alias
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 zstyle ':completion:*' regular true
+
+# Allow for completion caching for things like bazel
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
 # Use neovim everywhere
 export EDITOR='nvim'
