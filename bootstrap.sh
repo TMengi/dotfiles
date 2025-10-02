@@ -91,12 +91,18 @@ fi
 print_header "Installing shell"
 
 sudo apt install zsh
-if [[ $SHELL == "$(which zsh)" ]]; then
+
+set +u
+if [[ -n $ZSH_VERSION ]]; then
   echo "SHELL is already zsh"
 else
   echo "Setting SHELL to zsh"
   sudo chsh -s "$(which zsh)" $USER
+  echo "Rerun from inside zsh"
+  exit
 fi
+set -u
+
 if [[ -e $ZSH ]]; then
   echo "oh-my-zsh already installed"
 else
