@@ -135,12 +135,27 @@ else
   echo "installing rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
-if [[ "$(command -v rg)" ]]; then
-  echo "ripgrep already installed"
-else
-  echo "installing ripgrep"
-  cargo install ripgrep
-fi
+
+# Check if a cargo crate is already installed, then install it
+#
+# Args:
+#   $1: Name of the crate
+#   $2: Name of the executable, if different from the crate
+function cargo_check_or_install() {
+  name=$1
+  if [[ $# -lt 2 ]]; then
+    executable=$name
+  else
+    executable=$2
+  fi
+  if [[ "$(command -v $executable)" ]]; then 
+    echo "$name already installed"
+  else
+    cargo install $name
+  fi
+}
+
+cargo_check_or_install ripgrep rg
 
 # Alacritty has a bunch of apt requirements
 sudo apt install \
@@ -151,11 +166,12 @@ libxcb-xfixes0-dev \
 libxkbcommon-dev \
 python3 \
 
-cargo install alacritty
+cargo_check_or_install alacritty
 
-cargo install zellij
+cargo_check_or_install zellij
 
-cargo install zoxide
+cargo_check_or_install zoxide
+
 
 ###############################################################################
 print_header "Boostrap complete!"
