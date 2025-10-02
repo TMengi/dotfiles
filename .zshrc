@@ -108,16 +108,16 @@ export MANPAGER="$EDITOR +Man!"
 alias zshrc="$EDITOR ~/.zshrc"
 # Put all your local configuration that shouldn't be publicly version
 # controlled into here
-export LOCAL_ZSHRC="$HOME/.local_zshrc"
+export LOCAL_ZSHRC="~/.local_zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
+# Alias builtins and GNU standard tools
+alias ls='eza'
 alias ll='ls -lahF'
+eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-
-alias rsync='rsync -a --info=progress2'
-alias da='deactivate'
 
 # Tmux stuff
 alias tls='tmux list-sessions'
@@ -202,9 +202,8 @@ source "$HOME/.cargo/env"
 # Added for golang
 export PATH=$PATH:/usr/local/go/bin
 
-# Unleash the power of zoxide
-eval "$(zoxide init zsh)"
-alias cd='z'
+alias rsync='rsync -a --info=progress2'
+alias da='deactivate'
 
 if [[ -f $LOCAL_ZSHRC ]]; then
   source $LOCAL_ZSHRC

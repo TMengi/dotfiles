@@ -172,6 +172,7 @@ cargo_check_or_install zellij
 
 cargo_check_or_install zoxide
 
+cargo_check_or_install eza
 
 ###############################################################################
 print_header "Boostrap complete!"
