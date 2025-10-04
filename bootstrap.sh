@@ -19,7 +19,6 @@ User-owned directory for extra things that need to be installed and shouldn't
 live in a privileged location
 EOF
 
-
 # DEPRECATED
 # Check if something is already installed, then install it with apt
 #
@@ -92,17 +91,6 @@ print_header "Installing shell"
 
 sudo apt install zsh
 
-set +u
-if [[ -n $ZSH_VERSION ]]; then
-  echo "SHELL is already zsh"
-else
-  echo "Setting SHELL to zsh"
-  sudo chsh -s "$(which zsh)" $USER
-  echo "Rerun from inside zsh"
-  exit
-fi
-set -u
-
 if [[ -e $ZSH ]]; then
   echo "oh-my-zsh already installed"
 else
@@ -154,7 +142,7 @@ function cargo_check_or_install() {
   else
     executable=$2
   fi
-  if [[ "$(command -v $executable)" ]]; then 
+  if [[ "$(command -v $executable)" ]]; then
     echo "$name already installed"
   else
     cargo install $name
