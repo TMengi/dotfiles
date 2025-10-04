@@ -12,10 +12,12 @@ EXTRAS_DIR="$HOME/tools"
 if [[ ! -d $EXTRAS_DIR ]]; then
   mkdir $EXTRAS_DIR
 fi
-cat >$EXTRAS_DIR/README.md <<EOF
+if [[ ! -f $EXTRAS_DIR/README.md ]]; then
+  cat >$EXTRAS_DIR/README.md <<EOF
 User-owned directory for extra things that need to be installed and shouldn't
 live in a privileged location
 EOF
+fi
 
 ###############################################################################
 print_header "Installing baseline software"
