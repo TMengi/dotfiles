@@ -23,7 +23,7 @@ automatically sourced by the main `.zshrc` if it exists.
 ### Fundamentals
 - Git
     - Used for installing many other tools
-    - See note about [[README#Gitconfig]]
+    - See note about [gitconfig](#gitconfig)
     - Also includes [lazygit](https://github.com/jesseduffield/lazygit) and
       [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
         - Configuration in `.config/lazygit`
@@ -34,7 +34,7 @@ automatically sourced by the main `.zshrc` if it exists.
 ### Shell: zsh
 - Installed with apt
 - Configuration in `.zshrc`
-    - See also [[README#Additional local configuration]]
+    - See [note about local configuration](#additional-local-configuration)
 
 ### Terminal emulator: alacritty
 - [Github](https://github.com/alacritty/alacritty)
