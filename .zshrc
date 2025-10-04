@@ -108,7 +108,7 @@ export MANPAGER="$EDITOR +Man!"
 alias zshrc="$EDITOR ~/.zshrc"
 # Put all your local configuration that shouldn't be publicly version
 # controlled into here
-export LOCAL_ZSHRC="~/.local_zshrc"
+export LOCAL_ZSHRC="$HOME/.local_zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
 # Alias builtins and GNU standard tools
