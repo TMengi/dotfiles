@@ -220,7 +220,7 @@ function git_prompt() {
   if [ -z "$repo_root" ]; then
     branch=''
   else
-    branch=`git branch | grep "^*" | cut -b 3-40`
+    branch=`git branch --show-current | cut -b 1-40`
   fi
   [[ -n "$branch" ]] && echo "%F{yellow}<$branch> %f"
 }
