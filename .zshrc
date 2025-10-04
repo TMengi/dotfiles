@@ -205,6 +205,10 @@ export PATH=$PATH:/usr/local/go/bin
 alias rsync='rsync -a --info=progress2'
 alias da='deactivate'
 
+# kubernetes aliases
+alias k='kubectl'
+alias kp='k get pods'
+
 if [[ -f $LOCAL_ZSHRC ]]; then
   source $LOCAL_ZSHRC
 fi
