@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Script to stow system applications. Cannot be built on GNU stow directly
+# because these files are not under the home tree
 set -euo pipefail
 
 SYS_APPS="/usr/share/applications"
