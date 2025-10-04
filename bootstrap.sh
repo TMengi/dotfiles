@@ -42,7 +42,7 @@ function apt_check_or_install() {
 }
 
 ###############################################################################
-print_header "Install baseline software"
+print_header "Installing baseline software"
 
 sudo apt install \
 git \
@@ -52,39 +52,6 @@ g++ \
 cmake \
 wl-clipboard \
 stow \
-
-function install_lazygit() {
-  echo "Installing lazygit with tar"
-  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-  LAZYGIT_TAR="lazygit.tar.gz"
-  cd /tmp
-  curl -Lo $LAZYGIT_TAR "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-  tar xf $LAZYGIT_TAR lazygit
-  sudo install lazygit /usr/local/bin
-  rm $LAZYGIT_TAR lazygit
-  # Remove the default config because we will use our own
-  LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
-  if [[ -e $LAZYGIT_CONFIG ]]; then
-    rm $LAZYGIT_CONFIG
-  fi
-}
-if [[ $(command -v lazygit) ]]; then
-  echo "lazygit already installed"
-else
-  install_lazygit
-fi
-
-function install_diffsofancy() {
-  echo "Installing diff-so-fancy with git"
-  DIFF_SO_FANCY=$EXTRAS_DIR/diff-so-fancy
-  git clone https://github.com/so-fancy/diff-so-fancy.git $DIFF_SO_FANCY
-  sudo ln -s $DIFF_SO_FANCY/diff-so-fancy /usr/local/bin/
-}
-if [[ $(command -v diff-so-fancy) ]]; then
-  echo "diff-so-fancy already installed"
-else
-  install_diffsofancy
-fi
 
 ###############################################################################
 print_header "Installing shell"
@@ -118,6 +85,42 @@ function zsh_check_or_install() {
 zsh_check_or_install zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 zsh_check_or_install zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
 # TODO zsh-completions
+
+###############################################################################
+print_header "Installing git tools"
+
+function install_lazygit() {
+  echo "Installing lazygit with tar"
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  LAZYGIT_TAR="lazygit.tar.gz"
+  cd /tmp
+  curl -Lo $LAZYGIT_TAR "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf $LAZYGIT_TAR lazygit
+  sudo install lazygit /usr/local/bin
+  rm $LAZYGIT_TAR lazygit
+  # Remove the default config because we will use our own
+  LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
+  if [[ -e $LAZYGIT_CONFIG ]]; then
+    rm $LAZYGIT_CONFIG
+  fi
+}
+if [[ $(command -v lazygit) ]]; then
+  echo "lazygit already installed"
+else
+  install_lazygit
+fi
+
+function install_diffsofancy() {
+  echo "Installing diff-so-fancy with git"
+  DIFF_SO_FANCY=$EXTRAS_DIR/diff-so-fancy
+  git clone https://github.com/so-fancy/diff-so-fancy.git $DIFF_SO_FANCY
+  sudo ln -s $DIFF_SO_FANCY/diff-so-fancy /usr/local/bin/
+}
+if [[ $(command -v diff-so-fancy) ]]; then
+  echo "diff-so-fancy already installed"
+else
+  install_diffsofancy
+fi
 
 ###############################################################################
 print_header "Installing rust toolchain"
