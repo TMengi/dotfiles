@@ -50,6 +50,7 @@ g++ \
 cmake \
 wl-clipboard \
 stow \
+fd-find \
 
 ###############################################################################
 print_header "Installing shell"

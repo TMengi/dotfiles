@@ -114,6 +114,7 @@ alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 # Alias builtins and GNU standard tools
 alias ls='eza'
 alias ll='ls -lahF'
+alias find='fdfind'
 eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
