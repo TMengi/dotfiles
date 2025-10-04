@@ -1,5 +1,2 @@
-# Repos that we clone for various things
-diff-so-fancy
-
 # Lock files
 .config/nvim/lazy-lock.json
