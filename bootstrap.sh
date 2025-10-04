@@ -17,28 +17,6 @@ User-owned directory for extra things that need to be installed and shouldn't
 live in a privileged location
 EOF
 
-# DEPRECATED
-# Check if something is already installed, then install it with apt
-#
-# Args:
-#   $1: Command that can be checked to verify an existing install
-#   $2: Apt endpoint for a new install. If not provided, assumed to equal $1
-function apt_check_or_install() {
-  COMMAND_CHECK=$1
-  if [[ $# -lt 3 ]]; then
-    COMMAND_INSTALL=$COMMAND_CHECK
-  else
-    COMMAND_INSTALL=$2
-  fi
-
-  if [[ "$(command -v $COMMAND_CHECK)" ]]; then
-    echo "$COMMAND_INSTALL already installed"
-  else
-    echo "Installing $COMMAND_INSTALL"
-    sudo apt install $COMMAND_INSTALL
-  fi
-}
-
 ###############################################################################
 print_header "Installing baseline software"
 
