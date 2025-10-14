@@ -119,6 +119,7 @@ eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias path='echo $PATH | tr ":" "\n"'
 
 # Tmux stuff
 alias tls='tmux list-sessions'
