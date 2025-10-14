@@ -1,0 +1,7 @@
+filter_mode_shell_up_key_binding = "directory"
+inline_height = 20
+invert = true
+keymap_mode = "vim-insert"
+scroll_exits = false
+show_preview = false
+style = "compact"
