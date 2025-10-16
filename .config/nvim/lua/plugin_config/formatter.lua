@@ -23,6 +23,9 @@ require('formatter').setup({
     cpp = {
       require('formatter.filetypes.cpp').clangformat,
     },
+    proto = {
+      require('formatter.filetypes.proto').buf_format,
+    },
     ['*'] = {
       require('formatter.filetypes.any').remove_trailing_whitespace,
     },
