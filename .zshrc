@@ -163,6 +163,8 @@ alias gbg='gb | grep gone'
 alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 alias lg='lazygit'
+alias gpo='git push origin'
+alias gponv='git push origin --no-verify'
 
 function gbp() {
   # Displays previous git branches.
