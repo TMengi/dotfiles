@@ -1,3 +1,9 @@
 local keymap = vim.keymap
-keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-keymap.set('n',             'S', '<Plug>(leap-from-window)')
+local leap = require('leap').leap
+local clever_s = require('leap.user').with_traversal_keys('s', 'S')
+keymap.set({ 'n', 'x', 'o' }, 's', function()
+  leap({ opts = clever_s })
+end)
+keymap.set({ 'n', 'x', 'o' }, 'S', function()
+  leap({ opts = clever_s, backward = true })
+end)
