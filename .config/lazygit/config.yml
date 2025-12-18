@@ -5,3 +5,5 @@ git:
   autoFetch: false
 # Use exit with esc key instead of ctrl-c
 quitOnTopLevelReturn: true
+os:
+  edit: 'nvim --server /tmp/nvimsocket --remote-tab {{filename}}'

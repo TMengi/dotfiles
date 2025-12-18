@@ -97,7 +97,8 @@ zstyle ':completion:*' regular true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-# Use neovim everywhere
+# Use neovim everywhere with a fixed server socket
+alias nvim='nvim --listen /tmp/nvimsocket'
 export EDITOR='nvim'
 export VISUAL=$EDITOR
 alias vim=$EDITOR
