@@ -112,13 +112,14 @@ export LOCAL_ZSHRC="$HOME/.local_zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
 # Alias builtins and GNU standard tools
-alias ls='eza'
-alias ll='ls -lahF'
 eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias path='echo $PATH | tr ":" "\n"'
+alias ls='eza'
+alias ll='eza -laghF --total-size'
+alias tree='eza -T'
 
 # Tmux stuff
 alias tls='tmux list-sessions'
