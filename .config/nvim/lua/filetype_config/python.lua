@@ -14,6 +14,6 @@ api.nvim_create_autocmd('FileType', {
     keymap.set('n', '<leader>y', ':tabnew pyrightconfig.json<cr>', { buffer = true })
 
     -- Ruff formating and import sorting
-    keymap.set('n', '<leader>i', ':!ruff check --select I --fix<cr>', { buffer = true })
+    keymap.set('n', '<leader>i', ':!ruff check --select I --fix<cr>', { buffer = true, silent = true })
   end,
 })
