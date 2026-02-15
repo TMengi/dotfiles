@@ -120,6 +120,7 @@ alias path='echo $PATH | tr ":" "\n"'
 alias ls='eza'
 alias ll='eza -laghF'
 alias tree='eza -T'
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # Tmux stuff
 alias tls='tmux list-sessions'

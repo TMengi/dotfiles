@@ -150,5 +150,7 @@ cargo_check_or_install zoxide
 
 cargo_check_or_install eza
 
+cargo_check_or_install atuin
+
 ###############################################################################
 print_header "Boostrap complete!"
