@@ -119,7 +119,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias path='echo $PATH | tr ":" "\n"'
 alias ls='eza'
-alias ll='eza -laghF --total-size'
+alias ll='eza -laghF'
 alias tree='eza -T'
 
 # Tmux stuff
