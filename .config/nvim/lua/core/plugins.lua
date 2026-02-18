@@ -22,7 +22,10 @@ require('lazy').setup({
   -- Editor niceties
   'windwp/nvim-autopairs', -- Automatically add surround mark pairs
   'kylechui/nvim-surround', -- Surround mark manager
-  'ggandor/leap.nvim', -- Quick buffer navigation
+  -- Quick buffer navigation
+  {
+    url = 'https://codeberg.org/andyg/leap.nvim',
+  },
   'Yggdroot/indentLine', -- Nice indentation formatting
   'numToStr/comment.nvim', -- Quick commenter
   'nvim-tree/nvim-tree.lua', -- File tree
