@@ -22,9 +22,8 @@ require('lazy').setup({
   -- Editor niceties
   'windwp/nvim-autopairs', -- Automatically add surround mark pairs
   'kylechui/nvim-surround', -- Surround mark manager
-  -- Quick buffer navigation
   {
-    url = 'https://codeberg.org/andyg/leap.nvim',
+    url = 'https://codeberg.org/andyg/leap.nvim', -- Quick buffer navigation
   },
   'Yggdroot/indentLine', -- Nice indentation formatting
   'numToStr/comment.nvim', -- Quick commenter
@@ -68,7 +67,11 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp-signature-help', -- Function signature completion
     },
   },
-  'nvim-treesitter/nvim-treesitter', -- Concrete syntax tree, highlighting, etc.
+  {
+    'nvim-treesitter/nvim-treesitter', -- Concrete syntax tree, highlighting, etc.
+    lazy = false,
+    build = ':TSUpdate',
+  },
 
   -- Status line
   {
