@@ -2,7 +2,6 @@
 -- automatically. Use :checkhealth nvim-treesitter to see if it is available,
 -- and rectify with `cargo install --locked tree-sitter-cli` if necessary
 
-local api = vim.api
 local fn = vim.fn
 local treesitter = require('nvim-treesitter')
 local configs = require('nvim-treesitter.configs')
