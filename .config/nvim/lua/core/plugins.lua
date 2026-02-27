@@ -69,6 +69,7 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter', -- Concrete syntax tree, highlighting, etc.
+    branch = 'master',
     lazy = false,
     build = ':TSUpdate',
   },

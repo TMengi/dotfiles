@@ -15,6 +15,7 @@ local languages = {
   'python',
   'regex',
   'rust',
+  'ssh_config',
   'toml',
   'vim',
   'yaml',
