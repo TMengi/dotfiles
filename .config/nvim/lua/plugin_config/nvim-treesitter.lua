@@ -5,6 +5,7 @@
 local api = vim.api
 local fn = vim.fn
 local treesitter = require('nvim-treesitter')
+local configs = require('nvim-treesitter.configs')
 
 local languages = {
   'bash',
@@ -23,10 +24,7 @@ local languages = {
 treesitter.setup({
   install_dir = fn.stdpath('data') .. '/site',
 })
-treesitter.install(languages):wait(300000) -- wait for up to 5 minutes to compile parsers
-api.nvim_create_autocmd('FileType', {
-  pattern = languages,
-  callback = function()
-    vim.treesitter.start()
-  end,
+configs.setup({
+  ensure_installed = languages,
+  auto_install = true,
 })
