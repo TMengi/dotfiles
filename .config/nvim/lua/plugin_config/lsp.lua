@@ -22,6 +22,7 @@ require('mason-lspconfig').setup({
     'pyright@1.1.259',
     'ruff',
     'rust_analyzer',
+    'stylua',
     'yamlls',
   },
 })
