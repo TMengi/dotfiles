@@ -129,6 +129,8 @@ alias tat='tmux a -t'
 # Git aliases
 alias g='git'
 alias gce='git checkout'
+alias gw='git switch'
+alias grs='git restore'
 alias gp='git pull'
 alias gd='git diff'
 alias gb='git branch -vv'
