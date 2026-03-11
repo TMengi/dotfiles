@@ -19,6 +19,24 @@ live in a privileged location
 EOF
 fi
 
+# Obtain latest release version from Github
+#
+# Args:
+#   $1: Github owner and repository name in the form "owner/repo"
+#
+# Returns:
+#   Version in the form "vX.Y.Z"
+function get_github_release_version() {
+  local OWNER_REPO=$1
+  local ENDPOINT="https://api.github.com/repos/$OWNER_REPO/releases/latest"
+  local VERSION_RESULT=$(curl -s $ENDPOINT | jq -r '.tag_name')
+  if [[ -z $VERSION_RESULT ]]; then
+    echo "Could not detect version for $OWNER_REPO"
+    exit 1
+  fi
+  echo $VERSION_RESULT
+}
+
 ###############################################################################
 print_header "Installing baseline software"
 
@@ -52,7 +70,7 @@ ZSH_PLUGINS=$ZSH_CUSTOM/plugins
 #     relative to $ZSH_PLUGINS
 #   $2: Git repo to clone a new install
 function zsh_check_or_install() {
-  PLUGIN_DIR="$ZSH_PLUGINS/$1"
+  local PLUGIN_DIR="$ZSH_PLUGINS/$1"
   if [[ -e $PLUGIN_DIR ]]; then
     echo "$1 already installed"
   else
@@ -70,15 +88,11 @@ print_header "Installing git tools"
 
 function install_lazygit() {
   echo "Installing lazygit with tar"
-  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-  LAZYGIT_TAR="lazygit.tar.gz"
-  cd /tmp
-  curl -Lo $LAZYGIT_TAR "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-  tar xf $LAZYGIT_TAR lazygit
-  sudo install lazygit /usr/local/bin
-  rm $LAZYGIT_TAR lazygit
+  local LAZYGIT_VERSION=$(get_github_release_version jesseduffield/lazygit)
+  local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz" 
+  curl -fsSL $LAZYGIT_ENDPOINT | sudo tar -xvz -C /usr/local/bin lazygit
   # Remove the default config because we will use our own
-  LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
+  local LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
   if [[ -e $LAZYGIT_CONFIG ]]; then
     rm $LAZYGIT_CONFIG
   fi
