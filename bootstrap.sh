@@ -87,15 +87,20 @@ zsh_check_or_install zsh-syntax-highlighting https://github.com/zsh-users/zsh-sy
 print_header "Installing git tools"
 
 function install_lazygit() {
-  echo "Installing lazygit with tar"
-  local LAZYGIT_VERSION=$(get_github_release_version jesseduffield/lazygit)
+  local LAZYGIT_VERSION=${lazygit_version:-$(get_github_release_version jesseduffield/lazygit)}
+  echo "Installing lazygit $LAZYGIT_VERSION from github release"
+
+  # Remove the symlink to our config because the intallation will overwrite it
+  local LAZYGIT_CONFIG_DIR="$HOME/.config/lazygit"
+  if [[ -e $LAZYGIT_CONFIG_DIR ]]; then
+    rm -r $LAZYGIT_CONFIG_DIR
+  fi
+
   local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
   curl -fsSL $LAZYGIT_ENDPOINT | sudo tar -xvz -C /usr/local/bin lazygit
-  # Remove the default config because we will use our own
-  local LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
-  if [[ -e $LAZYGIT_CONFIG ]]; then
-    rm $LAZYGIT_CONFIG
-  fi
+
+  # Remove the automatically created config
+  rm -r $LAZYGIT_CONFIG_DIR
 }
 if [[ $(command -v lazygit) ]]; then
   echo "lazygit already installed"
@@ -104,7 +109,7 @@ else
 fi
 
 function install_diffsofancy() {
-  echo "Installing diff-so-fancy with git"
+  echo "Installing diff-so-fancy from git repo"
   DIFF_SO_FANCY=$EXTRAS_DIR/diff-so-fancy
   git clone https://github.com/so-fancy/diff-so-fancy.git $DIFF_SO_FANCY
   sudo ln -s $DIFF_SO_FANCY/diff-so-fancy /usr/local/bin/
@@ -121,9 +126,8 @@ print_header "Installing fzf"
 function install_fzf() {
   local FZF_VERSION=$(get_github_release_version junegunn/fzf)
   echo "Installing fzf $FZF_VERSION from github release"
-  curl -fsSL \
-    https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz \
-    | sudo tar -xvz -C /usr/local/bin fzf
+  local FZF_ENDPOINT="https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz"
+  curl -fsSL $FZF_ENDPOINT | sudo tar -xvz -C /usr/local/bin fzf
 }
 if [[ $(command -v fzf) ]]; then
   echo "fzf already installed"
@@ -148,12 +152,8 @@ fi
 #   $1: Name of the crate
 #   $2: Name of the executable, if different from the crate
 function cargo_check_or_install() {
-  name=$1
-  if [[ $# -lt 2 ]]; then
-    executable=$name
-  else
-    executable=$2
-  fi
+  local name=$1
+  local executable=${2:-$name}
   if [[ "$(command -v $executable)" ]]; then
     echo "$name already installed"
   else
@@ -171,7 +171,6 @@ libfontconfig1-dev \
 libxcb-xfixes0-dev \
 libxkbcommon-dev \
 python3 \
-
 cargo_check_or_install alacritty
 
 cargo_check_or_install zellij
