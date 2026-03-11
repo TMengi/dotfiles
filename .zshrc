@@ -172,6 +172,41 @@ alias k='kubectl'
 alias kp='k get pods'
 
 # =============================================================================
+# FZF
+# =============================================================================
+# File and directory search
+FZF_CTRL_T_COMMAND='fdfind'
+FZF_CTRL_T_OPTS=$(cat <<EOF
+--walker-skip .git,node_modules,target
+--preview 'batcat -n --color=always {}'
+--bind 'ctrl-/:change-preview-window(down|hidden|)'
+--border
+EOF
+)
+
+# Directory-only search
+FZF_ALT_C_COMMAND='fdfind -td'
+FZF_ALT_C_OPTS=$(cat <<EOF
+--walker-skip .git,node_modules,target
+--preview 'eza -T {}'
+--bind 'ctrl-/:change-preview-window(down|hidden|)'
+--border
+EOF
+)
+
+# Fuzzy completion
+FZF_COMPLETION_OPTS='--border'
+function _fzf_compgen_path() {
+  fdfind --hidden --follow --exclude ".git" . "$1"
+}
+function _fzf_compgen_dir() {
+  fdfind --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Disable ctrl-R since that's used for atuin
+FZF_CTRL_R_COMMAND= source <(fzf --zsh)
+
+# =============================================================================
 # Source local zshrc
 # =============================================================================
 # Do this just before declaring PS1 so that the local environment can define
