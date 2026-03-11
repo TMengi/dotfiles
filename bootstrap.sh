@@ -123,6 +123,35 @@ else
 fi
 
 ###############################################################################
+print_header "Installing neovim"
+
+function install_nvim() {
+  # Use supplied version or query for latest
+  local NVIM_VERSION=${nvim_version:-$(get_github_release_version neovim/neovim)}
+  echo "Installing nvim $NVIM_VERSION from github release"
+
+  # Download the endpoint to a tmpdir
+  local NVIM_TMP_PATH=/tmp/nvim.appimage
+  local NVIM_ENDPOINT="https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-linux-x86_64.appimage"
+  curl -fsSL $NVIM_ENDPOINT -o $NVIM_TMP_PATH
+
+  # Extract the appimage and move to final location
+  chmod +x $NVIM_TMP_PATH
+  $(cd $(dirname $NVIM_TMP_PATH) && $NVIM_TMP_PATH --appimage-extract)
+  local EXTRACTED_PATH=$(dirname $NVIM_TMP_PATH)/squashfs-root
+  sudo mv $EXTRACTED_PATH /opt/nvim_extra
+  sudo ln -s /opt/nvim_extra/AppRun /usr/local/bin/nvim_extra
+
+  # Cleanup
+  rm $NVIM_TMP_PATH
+}
+if [[ $(command -v nvim) ]]; then
+  echo "nvim already installed"
+else
+  install_nvim
+fi
+
+###############################################################################
 print_header "Installing fzf"
 
 function install_fzf() {
