@@ -89,7 +89,7 @@ print_header "Installing git tools"
 function install_lazygit() {
   echo "Installing lazygit with tar"
   local LAZYGIT_VERSION=$(get_github_release_version jesseduffield/lazygit)
-  local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz" 
+  local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
   curl -fsSL $LAZYGIT_ENDPOINT | sudo tar -xvz -C /usr/local/bin lazygit
   # Remove the default config because we will use our own
   local LAZYGIT_CONFIG="$HOME/.config/lazygit/config.yml"
@@ -113,6 +113,22 @@ if [[ $(command -v diff-so-fancy) ]]; then
   echo "diff-so-fancy already installed"
 else
   install_diffsofancy
+fi
+
+###############################################################################
+print_header "Installing fzf"
+
+function install_fzf() {
+  local FZF_VERSION=$(get_github_release_version junegunn/fzf)
+  echo "Installing fzf $FZF_VERSION from github release"
+  curl -fsSL \
+    https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz \
+    | sudo tar -xvz -C /usr/local/bin fzf
+}
+if [[ $(command -v fzf) ]]; then
+  echo "fzf already installed"
+else
+  install_fzf
 fi
 
 ###############################################################################
