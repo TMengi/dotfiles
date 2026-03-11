@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+DOTFILES_BASE=$(dirname $0)
+
 function print_header() {
   echo ''
   echo '################################################################################'
@@ -180,6 +182,10 @@ cargo_check_or_install zoxide
 cargo_check_or_install eza
 
 cargo_check_or_install atuin
+
+###############################################################################
+print_header "Stowing configs"
+$DOTFILES_BASE/stow.sh
 
 ###############################################################################
 print_header "Boostrap complete!"
