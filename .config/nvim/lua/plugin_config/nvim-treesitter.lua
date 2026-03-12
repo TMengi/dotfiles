@@ -27,4 +27,7 @@ treesitter.setup({
 configs.setup({
   ensure_installed = languages,
   auto_install = true,
+  highlight = {
+    enable = true,
+  },
 })
