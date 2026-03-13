@@ -1,8 +1,5 @@
 -- Colorscheme configuration
 
--- vim.opt.termguicolors = true
--- vim.cmd.colorscheme('gruvbox')
-
 require('catppuccin').setup({
   flavour = 'macchiato',
   dim_inactive = {
@@ -20,4 +17,4 @@ require('catppuccin').setup({
     treesitter = true,
   },
 })
-vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('catppuccin-nvim')
