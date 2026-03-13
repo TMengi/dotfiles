@@ -17,7 +17,7 @@ require('mason-lspconfig').setup({
     'buf_ls',
     'clangd',
     'jsonls',
-    'lua_ls',
+    'lua_ls@3.16.4',  -- Temporary for https://github.com/folke/lazydev.nvim/issues/136
     'markdown_oxide',
     'pyright@1.1.259',
     'ruff',
