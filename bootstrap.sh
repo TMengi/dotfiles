@@ -201,7 +201,8 @@ libfreetype6-dev \
 libfontconfig1-dev \
 libxcb-xfixes0-dev \
 libxkbcommon-dev \
-python3 \
+python3
+
 cargo_check_or_install alacritty
 
 cargo_check_or_install zellij
