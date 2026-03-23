@@ -139,8 +139,8 @@ function install_nvim() {
   chmod +x $NVIM_TMP_PATH
   $(cd $(dirname $NVIM_TMP_PATH) && $NVIM_TMP_PATH --appimage-extract)
   local EXTRACTED_PATH=$(dirname $NVIM_TMP_PATH)/squashfs-root
-  sudo mv $EXTRACTED_PATH /opt/nvim_extra
-  sudo ln -s /opt/nvim_extra/AppRun /usr/local/bin/nvim_extra
+  sudo mv $EXTRACTED_PATH /opt/nvim
+  sudo ln -sf /opt/nvim/AppRun /usr/local/bin/nvim
 
   # Cleanup
   rm $NVIM_TMP_PATH
