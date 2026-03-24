@@ -57,7 +57,7 @@ print_header "Installing shell"
 
 sudo apt install zsh
 
-if [[ -e $ZSH ]]; then
+if [[ -n ${ZSH:-} ]]; then
   echo "oh-my-zsh already installed"
 else
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
