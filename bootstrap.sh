@@ -101,9 +101,6 @@ function install_lazygit() {
 
   local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
   curl -fsSL $LAZYGIT_ENDPOINT | sudo tar -xvz -C /usr/local/bin lazygit
-
-  # Remove the automatically created config
-  rm -r $LAZYGIT_CONFIG_DIR
 }
 if [[ $(command -v lazygit) ]]; then
   echo "lazygit already installed"
