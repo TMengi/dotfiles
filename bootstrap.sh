@@ -49,6 +49,7 @@ gcc \
 g++ \
 cmake \
 wl-clipboard \
+jq \
 stow \
 fd-find \
 
