@@ -10,7 +10,7 @@ on:
 
 jobs:
   run_bootstrap:
-    runs-on: docker
+    runs-on: node
     steps:
       - uses: actions/checkout/@v6
       - run: apt update
