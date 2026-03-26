@@ -1,9 +1,11 @@
+name: Bootstrap
+
 on:
   push:
     branches:
       - master
   pull_request:
-    tags: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
