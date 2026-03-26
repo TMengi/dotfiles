@@ -11,15 +11,13 @@ echo "Stowing applications from $STOW_APPS"
 function setup_alacritty() {
   # Application
   if [[ ! -h "$SYS_APPS/alacritty.desktop" ]]; then
-    cd $SYS_APPS
-    sudo ln -s $STOW_APPS/alacritty.desktop
+    sudo ln -s $STOW_APPS/alacritty.desktop $SYS_APPS/alacritty.desktop
   fi
   # Icon
   ICON_DIR="/opt/alacritty"
   if [[ ! -h "$ICON_DIR/alacritty.svg" ]]; then
     sudo mkdir -p $ICON_DIR
-    cd $ICON_DIR
-    sudo ln -s "$STOW_APPS/alacritty.svg"
+    sudo ln -s "$STOW_APPS/alacritty.svg" $ICON_DIR/alacritty.svg
   fi
 }
 setup_alacritty

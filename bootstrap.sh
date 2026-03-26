@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOTFILES_BASE=$(dirname $0)
+DOTFILES_BASE=$(dirname $(realpath $0))
 
 function print_header() {
   echo ''
@@ -42,7 +42,7 @@ function get_github_release_version() {
 ###############################################################################
 print_header "Installing baseline software"
 
-sudo apt install \
+sudo apt install -y \
 git \
 curl \
 gcc \
@@ -56,12 +56,16 @@ fd-find \
 ###############################################################################
 print_header "Installing shell"
 
-sudo apt install zsh
+sudo apt install -y zsh
 
+ZSHRC=$HOME/.zshrc
 if [[ -n ${ZSH:-} ]]; then
   echo "oh-my-zsh already installed"
 else
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  echo "Installing oh-my-zsh"
+  # Install zsh and run the rest of the script from there
+  curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+  zsh -c "source $ZSHRC && $0" && exit 0
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
@@ -172,7 +176,11 @@ if [[ "$(command -v rustup)" ]]; then
   echo "rustup already installed"
 else
   echo "installing rustup"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+    | sh -s -- -y
+  CARGO_ENV="$HOME/.cargo/env"
+  echo "Ephemerally sourcing $CARGO_ENV"
+  source $CARGO_ENV
 fi
 
 # Check if a cargo crate is already installed, then install it
@@ -193,13 +201,12 @@ function cargo_check_or_install() {
 cargo_check_or_install ripgrep rg
 
 # Alacritty has a bunch of apt requirements
-sudo apt install \
+sudo apt install -y \
 pkg-config \
 libfreetype6-dev \
 libfontconfig1-dev \
 libxcb-xfixes0-dev \
 libxkbcommon-dev \
-python3
 
 cargo_check_or_install alacritty
 
@@ -213,6 +220,15 @@ cargo_check_or_install atuin
 
 ###############################################################################
 print_header "Stowing configs"
+
+# If this is the initial installation then the default .zshrc from oh-my-zsh
+# will still exist. Move it and replace with our symlinked version
+if [[ -e $ZSHRC && ! -h $ZSHRC ]]; then
+  ZSHRC_BAK=$HOME/.zshrc_bak
+  echo "Moving existing zshrc to $ZSHRC_BAK"
+  mv $ZSHRC $ZSHRC_BAK
+fi
+
 $DOTFILES_BASE/stow.sh
 
 ###############################################################################

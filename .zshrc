@@ -73,15 +73,17 @@ alias zshrc="$EDITOR ~/.zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
 # Alias builtins and GNU standard tools
-eval "$(zoxide init zsh)" && alias cd='z'
+command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias path='echo $PATH | tr ":" "\n"'
-alias ls='eza'
-alias ll='eza -laghF'
-alias tree='eza -T'
-eval "$(atuin init zsh --disable-up-arrow)"
+if [[ $(command -v eza) ]]; then
+  alias ls='eza'
+  alias ll='eza -laghF'
+  alias tree='eza -T'
+fi
+command -v atuin > /dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Tmux stuff
 alias tls='tmux list-sessions'

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_ROOT="$(git rev-parse --show-toplevel)"
-echo "Stowing from $REPO_ROOT"
+STOW_ROOT="$(dirname $0)"
+echo "Stowing from $STOW_ROOT"
 
 # Main stow command
-$(cd $REPO_ROOT && stow .)
+stow --dir=$STOW_ROOT --target=$HOME .
 
 # Separate script for storing desktop application files
-$REPO_ROOT/applications/stow_apps.sh
+$STOW_ROOT/applications/stow_apps.sh
 
 echo "Done"
