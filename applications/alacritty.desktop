@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Alacritty
-Exec=$HOME/.cargo/bin/alacritty
+Exec=/usr/local/bin/alacritty
 Terminal=false
 Type=Application
 Icon=/opt/alacritty/alacritty.svg

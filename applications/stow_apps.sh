@@ -13,6 +13,8 @@ function setup_alacritty() {
   if [[ ! -h "$SYS_APPS/alacritty.desktop" ]]; then
     sudo ln -s $STOW_APPS/alacritty.desktop $SYS_APPS/alacritty.desktop
   fi
+  # Shortcut
+  sudo ln -sf $HOME/.cargo/bin/alacritty /usr/local/bin/alacritty
   # Icon
   ICON_DIR="/opt/alacritty"
   if [[ ! -h "$ICON_DIR/alacritty.svg" ]]; then
