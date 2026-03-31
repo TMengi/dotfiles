@@ -179,9 +179,10 @@ alias kp='k get pods'
 # FZF
 # =============================================================================
 # File and directory search
+FZF_IGNORE_DIRS='.git,node_modules,target'
 FZF_CTRL_T_COMMAND='fdfind'
 FZF_CTRL_T_OPTS=$(cat <<EOF
---walker-skip .git,node_modules,target
+--walker-skip $FZF_IGNORE_DIRS
 --preview 'batcat -n --color=always {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
 --border
@@ -191,7 +192,7 @@ EOF
 # Directory-only search
 FZF_ALT_C_COMMAND='fdfind -td'
 FZF_ALT_C_OPTS=$(cat <<EOF
---walker-skip .git,node_modules,target
+--walker-skip $FZF_IGNORE_DIRS
 --preview 'eza -T {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
 --border
@@ -207,8 +208,34 @@ function _fzf_compgen_dir() {
   fdfind --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# Disable ctrl-R since that's used for atuin
-FZF_CTRL_R_COMMAND= source <(fzf --zsh)
+# Disable ctrl-R since that's handled by atuin
+FZF_CTRL_R_COMMAND=
+
+source <(fzf --zsh)
+
+function _fzf_complete_git() {
+  local subcommand="$(awk '{print $2}' <<< $1)"
+  case "$subcommand" in
+    branch|checkout|switch|merge|rebase)
+      local search_command="git branch --sort=-committerdate | tr -d ' *'"
+      ;;
+    *)
+      local search_command="_fzf_compgen_path *"
+      ;;
+  esac
+  _fzf_complete --multi --reverse --prompt="$@" -- "$@" < <(eval $search_command)
+}
+
+for aylias in gb gce gw gm gr; do
+_full_command="$(whence $aylias)"
+source <(cat <<EOF
+_fzf_complete_${aylias}() {
+  shift
+  _fzf_complete_git '$_full_command ' \$@
+}
+EOF
+)
+done
 
 # =============================================================================
 # Source local zshrc
