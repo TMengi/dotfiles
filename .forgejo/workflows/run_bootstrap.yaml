@@ -9,10 +9,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  run_bootstrap:
+  test_bootstrap:
     runs-on: node
     steps:
       - uses: actions/checkout/@v6
       - run: apt update
       - run: apt install -y sudo
-      - run: ./bootstrap.sh
+
+      - name: Run bootstrap
+        run: ./bootstrap.sh
+
+      - name: Test Alacritty desktop
+        run: |
+          location=$(grep '^Exec=' /usr/share/applications/alacritty.desktop | cut -d '=' -f2)
+          [[ $(command -v $location) ]] && echo Success || exit 1
