@@ -9,5 +9,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset%  -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [pager]
   branch = false
+[push]
+	autoSetupRemote = true
 [credential "https://github.com"]
   helper = !/usr/bin/gh auth git-credential
