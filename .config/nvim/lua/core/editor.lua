@@ -92,6 +92,9 @@ api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI'
 -- Special commands and keymaps
 -- ============================================================================
 
+-- Quick save
+keymap.set('n', '<leader>ww', ':w<cr>', silent_noremap)
+
 -- Window navigation and resizing
 keymap.set('n', '<c-h>', '<c-w>h', silent_noremap)
 keymap.set('n', '<c-j>', '<c-w>j', silent_noremap)
