@@ -14,6 +14,7 @@ local lsp = vim.lsp
 -- Mason core is automatically setup by lspconfig
 require('mason-lspconfig').setup({
   ensure_installed = {
+    'ansiblels',
     'buf_ls',
     'clangd',
     'jsonls',
@@ -29,6 +30,7 @@ require('mason-lspconfig').setup({
 
 -- The available configurations live in
 -- ~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/configs
+lsp.enable('ansiblels')
 lsp.enable('bash-language-server')
 lsp.enable('clangd')
 lsp.enable('jsonls')

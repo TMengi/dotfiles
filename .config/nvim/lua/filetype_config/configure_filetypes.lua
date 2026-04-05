@@ -45,3 +45,12 @@ set_commentstring('pants', '#')
 set_commentstring('prototxt', '#')
 set_commentstring('kdl', '//')
 
+-- Try to detect ansible-flavored yaml files
+api.nvim_create_autocmd('FileType', {
+  pattern = 'yaml',
+  callback = function()
+    if vim.fn.search('^- \\(hosts\\|name\\):', 'wn') ~= 0 then
+      opt_local.filetype = 'yaml.ansible'
+    end
+  end,
+})
