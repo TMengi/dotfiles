@@ -135,6 +135,7 @@ alias gdo='git diff origin/"$(git branch --show-current)"'
 alias lg='lazygit'
 alias gpo='git push origin'
 alias gponv='git push origin --no-verify'
+alias groot='cd $(git rev-parse --show-toplevel)'
 
 # Displays previous git branches.
 #
