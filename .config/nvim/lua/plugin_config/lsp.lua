@@ -18,7 +18,7 @@ require('mason-lspconfig').setup({
     'buf_ls',
     'clangd',
     'jsonls',
-    'lua_ls@3.16.4',  -- Temporary for https://github.com/folke/lazydev.nvim/issues/136
+    'lua_ls@3.16.4', -- Temporary for https://github.com/folke/lazydev.nvim/issues/136
     'markdown_oxide',
     'pyright@1.1.259',
     'ruff',
@@ -51,8 +51,12 @@ local on_attach_global = function(_, _)
   keymap.set('n', 'gD', lsp.buf.declaration)
   keymap.set('n', 'gi', lsp.buf.implementation)
   keymap.set('n', 'gr', require('telescope.builtin').lsp_references)
-  keymap.set('n', ']g', diagnostic.goto_next)
-  keymap.set('n', '[g', diagnostic.goto_prev)
+  keymap.set('n', ']g', function()
+    diagnostic.jump({ count = 1, float = true })
+  end)
+  keymap.set('n', '[g', function()
+    diagnostic.jump({ count = -1, float = true })
+  end)
   keymap.set('i', '<c-k>', lsp.buf.signature_help)
 end
 
