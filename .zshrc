@@ -157,6 +157,13 @@ function gcep() {
   git checkout @{$1}
 }
 
+# Create a new branch with upstream set to the current branch
+function gwc() {
+  local parent_branch="$(git branch --show-current)"
+  git switch -c $@
+  git branch --set-upstream-to $parent_branch
+}
+
 # Zellij aliases
 alias zj='zellij'
 
