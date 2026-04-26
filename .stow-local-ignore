@@ -1,10 +1,11 @@
 # The repo itself
-README.md
-
-# Git stuff
 .git
 .gitignore
+.forgejo
+README.md
+
 # Keep this in the repo for reference, but don't stow it so we don't overwrite
+# the user's options
 .gitconfig
 
 # The stowing script itself
