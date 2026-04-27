@@ -1,20 +1,34 @@
 name: Bootstrap
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
-  workflow_dispatch:
 
 jobs:
   test_bootstrap:
     runs-on: node
     steps:
+      - name: Add homelab cert
+        env:
+          ROOT_CERT: ${{ vars.HOMELAB_ROOT_CA_CERT }}
+        run: |
+          apt-get update
+          apt-get install ca-certificates
+          CERT_LOCATION=/usr/local/share/ca-certificates/homelab_ca.cert.pem
+          echo "$ROOT_CERT" >$CERT_LOCATION
+          update-ca-certificates
+          git config --global http.sslCAInfo $CERT_LOCATION
+
+      - name: Ensure sudo
+        run: |
+          apt-get update
+          apt-get install -y sudo
+
       - uses: actions/checkout/@v6
-      - run: apt update
-      - run: apt install -y sudo
 
       - name: Run bootstrap
         run: ./bootstrap.sh
