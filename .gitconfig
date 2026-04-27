@@ -14,4 +14,4 @@
 [credential "https://github.com"]
   helper = !/usr/bin/gh auth git-credential
 [http]
-	sslCAInfo = /usr/local/share/ca-certificates/homelab_ca.cert.pem
+	sslCAInfo = /usr/local/share/ca-certificates/homelab_ca.crt
