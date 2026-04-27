@@ -17,6 +17,7 @@ local plugin_names = {
   'nvim-surround',
   'nvim-tree',
   'nvim-treesitter',
+  'oil',
   'qftools',
   -- 'rust-tools',
   'telescope',

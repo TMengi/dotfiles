@@ -100,6 +100,9 @@ require('lazy').setup({
     },
   },
 
+  -- Edit the filesystem like a buffer
+  'stevearc/oil.nvim',
+
   -- Rust specific
   {
     'simrat39/rust-tools.nvim',
