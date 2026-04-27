@@ -25,6 +25,12 @@ require('formatter').setup({
     json = {
       require('formatter.filetypes.json').jq,
     },
+    sh = {
+      require('formatter.filetypes.sh').shfmt,
+    },
+    zsh = {
+      require('formatter.filetypes.sh').shfmt,
+    },
     ['*'] = {
       require('formatter.filetypes.any').remove_trailing_whitespace,
     },

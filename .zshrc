@@ -23,7 +23,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Select a theme from $ZSH/themes
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="gnzh"
-eval `dircolors ~/.dir_colors/dircolors`
+eval $(dircolors ~/.dir_colors/dircolors)
 
 # Don't throw errors about unmatched globs
 setopt CSH_NULL_GLOB
@@ -73,7 +73,7 @@ alias zshrc="$EDITOR ~/.zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
 # Alias builtins and GNU standard tools
-command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd='z'
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -83,7 +83,7 @@ if [[ $(command -v eza) ]]; then
   alias ll='eza -laghF'
   alias tree='eza -T'
 fi
-command -v atuin > /dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Tmux stuff
 alias tls='tmux list-sessions'
@@ -189,7 +189,8 @@ alias kp='k get pods'
 # File and directory search
 FZF_IGNORE_DIRS='.git,node_modules,target'
 FZF_CTRL_T_COMMAND='fdfind'
-FZF_CTRL_T_OPTS=$(cat <<EOF
+FZF_CTRL_T_OPTS=$(
+  cat <<EOF
 --walker-skip $FZF_IGNORE_DIRS
 --preview 'batcat -n --color=always {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
@@ -199,7 +200,8 @@ EOF
 
 # Directory-only search
 FZF_ALT_C_COMMAND='fdfind -td'
-FZF_ALT_C_OPTS=$(cat <<EOF
+FZF_ALT_C_OPTS=$(
+  cat <<EOF
 --walker-skip $FZF_IGNORE_DIRS
 --preview 'eza -T {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
@@ -222,27 +224,28 @@ FZF_CTRL_R_COMMAND=
 source <(fzf --zsh)
 
 function _fzf_complete_git() {
-  local subcommand="$(awk '{print $2}' <<< $1)"
+  local subcommand="$(awk '{print $2}' <<<$1)"
   case "$subcommand" in
-    branch|checkout|switch|merge|rebase)
-      local search_command="git branch --sort=-committerdate | tr -d ' *'"
-      ;;
-    *)
-      local search_command="_fzf_compgen_path *"
-      ;;
+  branch | checkout | switch | merge | rebase)
+    local search_command="git branch --sort=-committerdate | tr -d ' *'"
+    ;;
+  *)
+    local search_command="_fzf_compgen_path *"
+    ;;
   esac
   _fzf_complete --multi --reverse --prompt="$@" -- "$@" < <(eval $search_command)
 }
 
 for aylias in gb gce gw gm gr; do
-_full_command="$(whence $aylias)"
-source <(cat <<EOF
+  _full_command="$(whence $aylias)"
+  source <(
+    cat <<EOF
 _fzf_complete_${aylias}() {
   shift
   _fzf_complete_git '$_full_command ' \$@
 }
 EOF
-)
+  )
 done
 
 # =============================================================================
@@ -262,13 +265,13 @@ function git_prompt() {
   if [ -z "$repo_root" ]; then
     branch=''
   else
-    branch=`git branch --show-current | cut -b 1-40`
+    branch=$(git branch --show-current | cut -b 1-40)
   fi
   [[ -n "$branch" ]] && echo "%F{yellow}<$branch> %f"
 }
 BRANCH="\$(git_prompt)"
-if [[ $(command -v "virtualenv_info") ]]; then  # This should be defined in $LOCAL_ZSHRC
-  VENV='$(virtualenv_info)'  # Purposefully not expanding the $
+if [[ $(command -v "virtualenv_info") ]]; then # This should be defined in $LOCAL_ZSHRC
+  VENV='$(virtualenv_info)'
 fi
 PS1="
 ╭─${VENV}%F{green}%n%f %B%F{blue}%~%f%b ${BRANCH}

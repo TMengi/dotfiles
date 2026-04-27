@@ -17,6 +17,7 @@ filetype_like('BUILD.pants', 'pants')
 filetype_like('*.script', 'matlab') -- Pretend GMAT scripts are matlab
 filetype_like('*.prototxt', 'prototxt')
 filetype_like('*.sim', 'yaml')
+filetype_like('.local_zshrc', 'zsh')
 
 -- Explicitly set syntax for certain uncommon filetypes
 local highlight_like = function(pattern, desired_syntax)
@@ -30,7 +31,6 @@ local highlight_like = function(pattern, desired_syntax)
 end
 highlight_like('*.prototxt', 'yaml')
 highlight_like('BUILD.pants', 'python')
-highlight_like('.local_zshrc', 'zsh')
 
 -- Explicitly set the comment string for certain uncommon filetypes
 local set_commentstring = function(filetype, commentstring)
