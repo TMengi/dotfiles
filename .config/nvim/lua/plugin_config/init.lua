@@ -19,7 +19,6 @@ local plugin_names = {
   'nvim-treesitter',
   'oil',
   'qftools',
-  -- 'rust-tools',
   'telescope',
   'vim-gitgutter',
 }

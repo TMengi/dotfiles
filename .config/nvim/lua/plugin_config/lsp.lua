@@ -38,8 +38,8 @@ lsp.enable('lua_ls')
 lsp.enable('markdown_oxide')
 lsp.enable('pyright')
 lsp.enable('ruff')
--- Commented because it's likely causing conflicts with rust-tools
--- lsp.enable('rust_analyzer')
+-- This is managed separately by rustaceanvim
+lsp.enable('rust_analyzer', false)
 lsp.enable('yamlls')
 
 -- Keymaps and settings to configure for every language server

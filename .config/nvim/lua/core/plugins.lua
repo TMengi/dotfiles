@@ -104,14 +104,7 @@ require('lazy').setup({
   'stevearc/oil.nvim',
 
   -- Rust specific
-  {
-    'simrat39/rust-tools.nvim',
-    dependencies = {
-      'mfussenegger/nvim-dap',
-      'nvim-neotest/nvim-nio',
-      'rcarriga/nvim-dap-ui',
-    },
-  },
+  'mrcjkb/rustaceanvim',
 
   -- Lua specific
   'folke/lazydev.nvim',
