@@ -8,3 +8,5 @@ quitOnTopLevelReturn: true
 # TODO: Figure out a better way to use multiple nvim sessions with sockets
 # os:
 #   edit: 'nvim --server /tmp/nvimsocket --remote-tab {{filename}}'
+gui:
+  nerdFontsVersion: "3"
