@@ -18,7 +18,7 @@ jobs:
         run: |
           apt-get update
           apt-get install ca-certificates
-          CERT_LOCATION=/usr/local/share/ca-certificates/homelab_ca.cert.pem
+          CERT_LOCATION=/usr/local/share/ca-certificates/homelab_ca.crt
           echo "$ROOT_CERT" >$CERT_LOCATION
           update-ca-certificates
           git config --global http.sslCAInfo $CERT_LOCATION
