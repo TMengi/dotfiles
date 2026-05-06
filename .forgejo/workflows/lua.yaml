@@ -1,0 +1,26 @@
+name: Lua
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - .config/nvim/**
+
+jobs:
+  hello:
+    runs-on: ci_runner
+    steps:
+      - uses: actions/checkout/@v6
+      - name: Install stylua
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install git+https://github.com/johnnymorganz/stylua
+      - name: Run stylua
+        run: |
+          set -e
+          source venv/bin/activate
+          stylua .config/nvim --check --verbose --color Always
