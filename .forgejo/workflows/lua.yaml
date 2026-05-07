@@ -10,7 +10,7 @@ on:
       - .config/nvim/**
 
 jobs:
-  hello:
+  lint:
     runs-on: ci_runner
     steps:
       - uses: actions/checkout/@v6
