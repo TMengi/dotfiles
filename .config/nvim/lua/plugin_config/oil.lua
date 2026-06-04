@@ -1,3 +1,5 @@
+local keymap = vim.keymap
+
 require('oil').setup({
   columns = {
     'icon',
@@ -25,3 +27,5 @@ require('oil').setup({
     ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
   },
 })
+
+keymap.set('n', '_', ':Oil<cr>', { silent = true, noremap = true })
