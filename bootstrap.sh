@@ -217,7 +217,15 @@ cargo_check_or_install zoxide
 
 cargo_check_or_install eza
 
-cargo_check_or_install atuin
+###############################################################################
+print_header "Install atuin"
+
+if [[ $(command -v atuin) ]]; then
+  echo "atuin already installed"
+else
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh |
+    sh -s -- --non-interactive
+fi
 
 ###############################################################################
 print_header "Stowing configs"
