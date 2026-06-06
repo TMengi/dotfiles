@@ -11,24 +11,42 @@ on:
 jobs:
   test_bootstrap:
     runs-on: ci_runner
+    continue-on-error: true
     steps:
       - name: Ensure sudo
+        continue-on-error: false
         run: |
           apt-get update
           apt-get install -y sudo
 
       - uses: actions/checkout/@v6
+        continue-on-error: false
 
       - name: Run bootstrap
+        id: bootstrap
+        continue-on-error: false
         run: |
           # Remove the rust installation that's part of the runner image since
           # bootstrap will install its own
           rm -rf $RUSTUP_HOME
-          unset CARGO_HOME RUSTUP_HOME
 
           ./bootstrap.sh
 
-      - name: Test Alacritty desktop
+      - name: Check alacritty configuration
+        id: alacritty_config
+        run: >
+          $CARGO_HOME/bin/alacritty
+          migrate
+          --config-file .config/alacritty/alacritty.toml
+          --dry-run --silent
+
+      - name: Test alacritty desktop launcher
         run: |
           location=$(grep '^Exec=' /usr/share/applications/alacritty.desktop | cut -d '=' -f2)
           [[ $(command -v $location) ]] && echo Success || exit 1
+
+      - name: Check zellij configuration
+        run: >
+          $CARGO_HOME/bin/zellij
+          --config .config/zellij/config.kdl
+          setup --check

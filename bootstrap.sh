@@ -43,15 +43,15 @@ function get_github_release_version() {
 print_header "Installing baseline software"
 
 sudo apt install -y \
-git \
-curl \
-gcc \
-g++ \
-cmake \
-wl-clipboard \
-jq \
-stow \
-fd-find \
+  git \
+  curl \
+  gcc \
+  g++ \
+  cmake \
+  wl-clipboard \
+  jq \
+  stow \
+  fd-find
 
 ###############################################################################
 print_header "Installing shell"
@@ -176,8 +176,8 @@ if [[ "$(command -v rustup)" ]]; then
   echo "rustup already installed"
 else
   echo "installing rustup"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
-    | sh -s -- -y
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs |
+    sh -s -- -y
   CARGO_ENV="${CARGO_HOME:-$HOME/.cargo}/env"
   echo "Ephemerally sourcing $CARGO_ENV"
   source $CARGO_ENV
@@ -203,11 +203,11 @@ cargo_check_or_install ripgrep rg
 
 # Alacritty has a bunch of apt requirements
 sudo apt install -y \
-pkg-config \
-libfreetype6-dev \
-libfontconfig1-dev \
-libxcb-xfixes0-dev \
-libxkbcommon-dev \
+  pkg-config \
+  libfreetype6-dev \
+  libfontconfig1-dev \
+  libxcb-xfixes0-dev \
+  libxkbcommon-dev
 
 cargo_check_or_install alacritty
 
@@ -232,7 +232,7 @@ print_header "Stowing configs"
 
 # If this is the initial installation then the default .zshrc from oh-my-zsh
 # will still exist. Move it and replace with our symlinked version
-if [[ -e $ZSHRC && ! -h $ZSHRC ]]; then
+if [[ -e $ZSHRC && ! -L $ZSHRC ]]; then
   ZSHRC_BAK=$HOME/.zshrc_bak
   echo "Moving existing zshrc to $ZSHRC_BAK"
   mv $ZSHRC $ZSHRC_BAK
