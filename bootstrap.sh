@@ -178,7 +178,7 @@ else
   echo "installing rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
     | sh -s -- -y
-  CARGO_ENV="$HOME/.cargo/env"
+  CARGO_ENV="${CARGO_HOME:-$HOME/.cargo}/env"
   echo "Ephemerally sourcing $CARGO_ENV"
   source $CARGO_ENV
 fi
@@ -194,6 +194,7 @@ function cargo_check_or_install() {
   if [[ "$(command -v $executable)" ]]; then
     echo "$name already installed"
   else
+    echo Installing $name
     cargo install $name
   fi
 }

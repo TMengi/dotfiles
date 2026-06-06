@@ -20,7 +20,13 @@ jobs:
       - uses: actions/checkout/@v6
 
       - name: Run bootstrap
-        run: ./bootstrap.sh
+        run: |
+          # Remove the rust installation that's part of the runner image since
+          # bootstrap will install its own
+          rm -rf $RUSTUP_HOME
+          unset CARGO_HOME RUSTUP_HOME
+
+          ./bootstrap.sh
 
       - name: Test Alacritty desktop
         run: |
