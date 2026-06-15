@@ -15,12 +15,11 @@ local lsp = vim.lsp
 require('mason-lspconfig').setup({
   ensure_installed = {
     'ansiblels',
-    'buf_ls',
     'clangd',
     'jsonls',
     'lua_ls@3.16.4', -- Temporary for https://github.com/folke/lazydev.nvim/issues/136
     'markdown_oxide',
-    'pyright@1.1.259',
+    'pyrefly',
     'ruff',
     'rust_analyzer',
     'stylua',
@@ -29,14 +28,14 @@ require('mason-lspconfig').setup({
 })
 
 -- The available configurations live in
--- ~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/configs
+-- ~/.local/share/nvim/lazy/nvim-lspconfig/lsp
 lsp.enable('ansiblels')
 lsp.enable('bash-language-server')
 lsp.enable('clangd')
 lsp.enable('jsonls')
 lsp.enable('lua_ls')
 lsp.enable('markdown_oxide')
-lsp.enable('pyright')
+lsp.enable('pyrefly')
 lsp.enable('ruff')
 -- This is managed separately by rustaceanvim
 lsp.enable('rust_analyzer', false)
@@ -74,3 +73,10 @@ api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+local print_lsp_clients = function()
+  print(vim.inspect(vim.tbl_map(function(client)
+    return client.name
+  end, vim.lsp.get_clients())))
+end
+api.nvim_create_user_command('LspList', print_lsp_clients, {})
