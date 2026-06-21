@@ -14,13 +14,7 @@ require('lualine').setup({
     },
     lualine_b = {
       'diff',
-      {
-        'diagnostics',
-        sources = {
-          -- 'nvim_diagnostic', Seems to raise the same errors as nvim_lsp
-          'nvim_lsp',
-        },
-      },
+      'diagnostics',
     },
     lualine_c = {},
     lualine_x = {
@@ -34,10 +28,17 @@ require('lualine').setup({
         cond = noice_api.status.command.has,
         color = { fg = '#ff9e64' },
       },
+      'searchcount',
       'encoding',
       'fileformat',
       'filetype',
+      'lsp_status',
     },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
   },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
   extensions = { 'nvim-tree' },
 })
