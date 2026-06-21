@@ -27,3 +27,23 @@ api.nvim_create_autocmd('FileType', {
     keymap.set('n', '<leader>ll', ':MarkdownToggleCheck<cr>', { silent = true, noremap = true, buffer = true })
   end,
 })
+
+-- Collapsed section in github markdown
+api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    api.nvim_create_user_command('InsertCollapsed', function()
+      -- Record cursor location
+      local row, col = unpack(api.nvim_win_get_cursor(0))
+      -- Insert these lines at the cursor location
+      local lines = {
+        '<details>',
+        '<summary></summary>',
+        '</details>',
+      }
+      api.nvim_buf_set_text(0, row - 1, col, row - 1, col, lines)
+      -- Place the cursor at between the summary tags
+      api.nvim_win_set_cursor(0, { row + 1, 9 })
+    end, {})
+  end,
+})
