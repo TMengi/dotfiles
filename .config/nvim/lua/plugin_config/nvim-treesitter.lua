@@ -19,9 +19,18 @@ local languages = {
   'toml',
   'vim',
   'yaml',
+  'zsh',
 }
 
 treesitter.setup({
   install_dir = fn.stdpath('data') .. '/site',
 })
 treesitter.install(languages)
+
+-- Automatically start highlighting
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
