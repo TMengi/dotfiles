@@ -2,6 +2,7 @@
 -- searching/highlighting, window navigation, etc.
 
 local api = vim.api
+local fn = vim.fn
 local keymap = vim.keymap
 local opt = vim.opt
 local opt_local = vim.opt_local
@@ -122,3 +123,14 @@ api.nvim_create_user_command('Splitlines', [[%s/\\n/\r/g]], {})
 
 -- Sort selected lines
 keymap.set('v', '<leader>s', ':sort<cr>', silent_noremap)
+
+-- Copy the current filepath to clipboard
+keymap.set('n', '<leader>gc', function()
+  local spath = vim.fn.expand('%')
+  spath = string.gsub(spath, '\n', '')
+  fn.setreg('+', { spath }, 'c')
+  fn.setreg('"', { spath }, 'c')
+  api.nvim_echo({ { spath, 'Normal' } }, false, {})
+end, {
+  desc = 'Copy current file path to clipboards',
+})
