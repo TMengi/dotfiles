@@ -81,7 +81,8 @@ alias path='echo $PATH | tr ":" "\n"'
 if [[ $(command -v eza) ]]; then
   alias ls='eza'
   alias ll='eza -laghF'
-  alias tree='eza -T'
+  # Always ignore certain directories for tree view
+  alias tree='eza -T --ignore-glob="venv|.git"'
 fi
 command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
