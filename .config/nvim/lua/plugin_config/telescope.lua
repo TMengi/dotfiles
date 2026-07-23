@@ -4,6 +4,7 @@ local telescope = require('telescope')
 telescope.setup({
   defaults = {
     file_ignore_patterns = {
+      '.git',
       'vxworks_system',
       'third_party',
     },
@@ -13,7 +14,9 @@ telescope.setup({
 local builtin = require('telescope.builtin')
 
 local opts = { noremap = true }
-keymap.set('n', '<leader>p', builtin.find_files, opts)
+keymap.set('n', '<leader>p', function()
+  builtin.find_files({ hidden = true })
+end, opts)
 keymap.set('n', '<leader><leader>', builtin.oldfiles, opts)
 keymap.set('n', '<leader>fg', builtin.live_grep, opts)
 keymap.set('n', '<leader>fr', builtin.resume, opts)
