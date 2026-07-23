@@ -2,8 +2,9 @@
 
 Steps to configure a new server:
   - Add to the mason-lspconfig setup below
-  - Enable wit hthe vim.lsp API
-  - Configure options in the LspAttach command
+  - Enable with vim.lsp.enable
+  - Configure options with vim.lsp.config
+  - Configure custom keymaps in the LspAttach command
 
 --]]
 local api = vim.api
@@ -37,8 +38,7 @@ lsp.enable('lua_ls')
 lsp.enable('markdown_oxide')
 lsp.enable('pyrefly')
 lsp.enable('ruff')
--- This is managed separately by rustaceanvim
-lsp.enable('rust_analyzer', false)
+lsp.enable('rust_analyzer', false) -- Managed separately by rustaceanvim
 lsp.enable('yamlls')
 
 -- Keymaps and settings to configure for every language server
@@ -68,15 +68,27 @@ api.nvim_create_autocmd('LspAttach', {
 
     on_attach_global()
 
+    -- Add custom keymaps for individual servers here
     if client.name == 'clangd' then
       keymap.set('n', '<leader>oo', ':LspClangdSwitchSourceHeader<cr>', { silent = true })
     end
   end,
 })
 
+-- Command to print all active LSP clients
 local print_lsp_clients = function()
   print(vim.inspect(vim.tbl_map(function(client)
     return client.name
   end, vim.lsp.get_clients())))
 end
 api.nvim_create_user_command('LspList', print_lsp_clients, {})
+
+lsp.config('yamlls', {
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = '*.k8s.yaml',
+      },
+    },
+  },
+})
