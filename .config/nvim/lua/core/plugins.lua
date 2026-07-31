@@ -104,7 +104,12 @@ require('lazy').setup({
   'stevearc/oil.nvim',
 
   -- Rust specific
-  'mrcjkb/rustaceanvim',
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^9',
+    -- Plugin implements lazy loading internally
+    lazy = false,
+  },
 
   -- Lua specific
   'folke/lazydev.nvim',

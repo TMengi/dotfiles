@@ -72,6 +72,14 @@ api.nvim_create_autocmd('LspAttach', {
     if client.name == 'clangd' then
       keymap.set('n', '<leader>oo', ':LspClangdSwitchSourceHeader<cr>', { silent = true })
     end
+
+    -- Toggle inlay hints
+    if client.name == 'rust-analyzer' then
+      keymap.set('n', '<leader>i', function()
+        local inlay_hint_enabled = lsp.inlay_hint.is_enabled()
+        lsp.inlay_hint.enable(not inlay_hint_enabled)
+      end)
+    end
   end,
 })
 
