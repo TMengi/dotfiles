@@ -80,7 +80,7 @@ alias ....='cd ../../..'
 alias path='echo $PATH | tr ":" "\n"'
 if [[ $(command -v eza) ]]; then
   alias ls='eza'
-  alias ll='eza -laghF'
+  alias ll='eza -lagh --classify always'
   # Always ignore certain directories for tree view
   alias tree='eza -T --ignore-glob="venv|.git"'
 fi
