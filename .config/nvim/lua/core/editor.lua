@@ -6,6 +6,7 @@ local fn = vim.fn
 local keymap = vim.keymap
 local opt = vim.opt
 local opt_local = vim.opt_local
+local wo = vim.wo
 
 local noremap = { noremap = true }
 local silent_noremap = { silent = true, noremap = true }
@@ -134,3 +135,8 @@ keymap.set('n', '<leader>gc', function()
 end, {
   desc = 'Copy current file path to clipboards',
 })
+
+-- Toggle wrap
+keymap.set('n', '<leader>nw', function()
+  wo.wrap = not wo.wrap
+end, silent_noremap)
