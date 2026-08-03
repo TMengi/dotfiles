@@ -177,7 +177,12 @@ source "$HOME/.cargo/env"
 # Added for golang
 export PATH=$PATH:/usr/local/go/bin
 
+# Normal defaults for rsync
 alias rsync='rsync -a --info=progress2'
+# Rsync in non-archive mode. Useful for transfering to NFS shares where user
+# operations are mapped to a user on the remote host.
+alias rsync_noa='rsync --no-owner --no-group --no-perms --no-times'
+
 alias da='deactivate'
 
 # kubernetes aliases
