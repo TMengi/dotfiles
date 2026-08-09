@@ -138,6 +138,9 @@ alias gpo='git push origin'
 alias gponv='git push origin --no-verify'
 alias groot='cd $(git rev-parse --show-toplevel)'
 
+# Forge tools aliases
+alias gv='forge_tools view'
+
 # Displays previous git branches.
 #
 # Optional argument is the number of branches to display. Defaults to 5.
