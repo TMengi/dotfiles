@@ -131,7 +131,6 @@ alias gra='git rebase --abort'
 alias gbb='gb | grep "^\*"'
 alias gbd='gb | grep -P "(?<=\[)$(git branch --show-current)"'
 alias gbg='gb | grep gone'
-alias gfp='git fetch --prune'
 alias gdo='git diff origin/"$(git branch --show-current)"'
 alias lg='lazygit'
 alias gpo='git push origin'
@@ -140,6 +139,7 @@ alias groot='cd $(git rev-parse --show-toplevel)'
 
 # Forge tools aliases
 alias gv='forge_tools view'
+alias gfp='forge_tools fetch-prune'
 
 # Displays previous git branches.
 #
