@@ -8,6 +8,7 @@ local treesitter = require('nvim-treesitter')
 local languages = {
   'bash',
   'cpp',
+  'dockerfile',
   'json',
   'lua',
   'markdown',
