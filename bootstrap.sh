@@ -183,23 +183,15 @@ else
   source $CARGO_ENV
 fi
 
-# Check if a cargo crate is already installed, then install it
-#
-# Args:
-#   $1: Name of the crate
-#   $2: Name of the executable, if different from the crate
-function cargo_check_or_install() {
-  local name=$1
-  local executable=${2:-$name}
-  if [[ "$(command -v $executable)" ]]; then
-    echo "$name already installed"
-  else
-    echo Installing $name
-    cargo install $name
-  fi
-}
+# Install the binary installer to use with other programs
+alias cargo-binstall='cargo-binstall --no-confirm'
+if [[ ! "$(command -v cargo-binstall)" ]]; then
+  cargo install cargo-binstall
+else
+  cargo-binstall cargo-binstall
+fi
 
-cargo_check_or_install ripgrep rg
+cargo-binstall ripgrep
 
 # Alacritty has a bunch of apt requirements
 sudo apt install -y \
@@ -208,14 +200,13 @@ sudo apt install -y \
   libfontconfig1-dev \
   libxcb-xfixes0-dev \
   libxkbcommon-dev
+cargo-binstall alacritty
 
-cargo_check_or_install alacritty
+cargo-binstall zellij
 
-cargo_check_or_install zellij
+cargo-binstall zoxide
 
-cargo_check_or_install zoxide
-
-cargo_check_or_install eza
+cargo-binstall eza
 
 ###############################################################################
 print_header "Install atuin"
