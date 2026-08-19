@@ -114,7 +114,7 @@ keymap.set('n', '<leader>tn', ':tabnew<cr>', silent_noremap)
 keymap.set('n', '<leader>*', 'viwy/<up>\\|\\<<c-r>0\\><cr>', silent_noremap)
 
 -- Github view macro
-keymap.set('n', '<leader>v', ':!gv %<cr>', silent_noremap)
+keymap.set('n', '<leader>v', ':!forge_tools view %<cr>', silent_noremap)
 
 -- Search for git merge conflicts
 keymap.set('n', '<leader>cf', '/<<<<<<<\\|=======\\|>>>>>>><cr>', noremap)
