@@ -1,16 +1,29 @@
+# Identity and signing
 [user]
   name = tyler
   email = tmccown21@gmail.com
+  signingkey = ~/.ssh/id_ed25519.pub
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign=true
+
 [core]
   editor = nvim
   excludesfile = .local_gitignore
-	pager = command -v diff-so-fancy >/dev/null 2>&1 && diff-so-fancy | less --tabs=4 -RF || less
+	pager = (command -v diff-so-fancy >/dev/null 2>&1) && (diff-so-fancy | less --tabs=4 -RF) || less
 [alias]
-  lg = log --graph --pretty=format:'%Cred%h%Creset%  -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --graph --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'
 [pager]
   branch = false
 [push]
 	autoSetupRemote = true
+[rerere]  # REuse REcorded REsolution
+	enabled = true
+
+# Authentication and certificates
 [credential "https://github.com"]
   helper = !/usr/bin/gh auth git-credential
 [http]
