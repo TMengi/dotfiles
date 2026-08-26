@@ -1,7 +1,7 @@
 # Identity and signing
 [user]
   name = tyler
-  email = tmccown21@gmail.com
+  email = tolurbot@proton.me
   signingkey = ~/.ssh/id_ed25519.pub
 [gpg]
   format = ssh
