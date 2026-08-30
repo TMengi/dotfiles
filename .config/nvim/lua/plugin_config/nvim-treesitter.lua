@@ -10,6 +10,7 @@ local languages = {
   'cpp',
   'dockerfile',
   'json',
+  'kdl',
   'lua',
   'markdown',
   'proto',
