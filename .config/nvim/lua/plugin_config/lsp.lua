@@ -100,3 +100,16 @@ lsp.config('yamlls', {
     },
   },
 })
+
+-- rust-analyzer is managed by the rustaceanvim plugin
+vim.g.rustaceanvim = {
+  server = {
+    default_settings = {
+      ['rust-analyzer'] = {
+        cargo = {
+          allFeatures = true,
+        },
+      },
+    },
+  },
+}
