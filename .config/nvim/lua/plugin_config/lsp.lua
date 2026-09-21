@@ -16,6 +16,7 @@ local lsp = vim.lsp
 require('mason-lspconfig').setup({
   ensure_installed = {
     'ansiblels',
+    'buf_ls@v1.54.0', -- Pinned version vendored by bazel
     'clangd',
     'jsonls',
     'lua_ls@3.16.4', -- Temporary for https://github.com/folke/lazydev.nvim/issues/136
@@ -32,6 +33,7 @@ require('mason-lspconfig').setup({
 -- ~/.local/share/nvim/lazy/nvim-lspconfig/lsp
 lsp.enable('ansiblels')
 lsp.enable('bash-language-server')
+lsp.enable('buf_ls')
 lsp.enable('clangd')
 lsp.enable('jsonls')
 lsp.enable('lua_ls')
@@ -40,6 +42,12 @@ lsp.enable('pyrefly')
 lsp.enable('ruff')
 lsp.enable('rust_analyzer', false) -- Managed separately by rustaceanvim
 lsp.enable('yamlls')
+
+-- In the pinned v1.54.0, lsp support is still a beta feature
+lsp.config('buf_ls', {
+  cmd = { 'buf', 'beta', 'lsp' },
+  root_markers = { 'buf.yaml' },
+})
 
 -- Keymaps and settings to configure for every language server
 local on_attach_global = function(_, _)
