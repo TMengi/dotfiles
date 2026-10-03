@@ -26,7 +26,7 @@ require('lazy').setup({
     url = 'https://codeberg.org/andyg/leap.nvim', -- Quick buffer navigation
   },
   'Yggdroot/indentLine', -- Nice indentation formatting
-  'numToStr/comment.nvim', -- Quick commenter
+  'nvim-mini/mini.comment', -- Quick commenter
   'nvim-tree/nvim-tree.lua', -- File tree
   'mhartington/formatter.nvim',
 
