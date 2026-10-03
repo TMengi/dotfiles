@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout/@v6
       - name: Install stylua
+        env:
+          # As of release-gitter 3.2, this will try to send the GITHUB_TOKEN as
+          # part of the request. In my forgejo this maps to a FORGEJO_TOKEN,
+          # which gets rejected with 401.
+          GITHUB_TOKEN: ""
         run: |
           python3 -m venv venv
           source venv/bin/activate
