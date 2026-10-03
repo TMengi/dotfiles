@@ -42,7 +42,7 @@ jobs:
 
       - name: Test alacritty desktop launcher
         run: |
-          location=$(grep '^Exec=' /usr/share/applications/alacritty.desktop | cut -d '=' -f2)
+          location=$(grep '^Exec=' $HOME/.local/share/applications/alacritty.desktop | cut -d '=' -f2)
           [[ $(command -v $location) ]] && echo Success || exit 1
 
       - name: Check zellij configuration

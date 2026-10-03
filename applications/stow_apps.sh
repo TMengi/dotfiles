@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
 # Script to stow system applications. Cannot be built on GNU stow directly
-# because these files are not under the home tree
+# because we need to resolve the user home directory.
 set -euo pipefail
 
-SYS_APPS="/usr/share/applications"
+# Source things from this repo
+APPS_SOURCE="$(dirname $(realpath $0))"
+echo "Stowing applications from $APPS_SOURCE"
 
-STOW_APPS="$(dirname $(realpath $0))"
-echo "Stowing applications from $STOW_APPS"
-
+# Cargo installed binary will live here
 CARGO_HOME=${CARGO_HOME:-$HOME/.cargo}
 
+# Destination for all launcher files and resources
+USER_APPS="$HOME/.local/share/applications"
+mkdir -p $USER_APPS
+
 function setup_alacritty() {
-  # Application
-  if [[ ! -L "$SYS_APPS/alacritty.desktop" ]]; then
-    sudo ln -s $STOW_APPS/alacritty.desktop $SYS_APPS/alacritty.desktop
-  fi
-  # Shortcut
-  sudo ln -sf $CARGO_HOME/bin/alacritty /usr/local/bin/alacritty
   # Icon
-  ICON_DIR="/opt/alacritty"
-  if [[ ! -L "$ICON_DIR/alacritty.svg" ]]; then
-    sudo mkdir -p $ICON_DIR
-    sudo ln -s "$STOW_APPS/alacritty.svg" $ICON_DIR/alacritty.svg
+  local ICON_DIR=$HOME/.local/share/icons/alacritty
+  local ALACRITTY_ICON=$ICON_DIR/alacritty.svg
+  mkdir -p $ICON_DIR
+  if [[ ! -L "$ALACRITTY_ICON" ]]; then
+    ln -s "$APPS_SOURCE/alacritty.svg" $ALACRITTY_ICON
+  fi
+
+  # Desktop launcher
+  local ALACRITTY_EXEC=$CARGO_HOME/bin/alacritty
+  if [[ ! -f "$USER_APPS/alacritty.desktop" ]]; then
+    export ALACRITTY_EXEC ALACRITTY_ICON
+    envsubst <$APPS_SOURCE/alacritty.desktop >$USER_APPS/alacritty.desktop
   fi
 }
 setup_alacritty

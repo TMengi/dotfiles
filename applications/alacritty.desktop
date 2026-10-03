@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Alacritty
-Exec=/usr/local/bin/alacritty
+Exec=${ALACRITTY_EXEC}
 Terminal=false
+StartupWMClass=Alacritty
 Type=Application
-Icon=/opt/alacritty/alacritty.svg
+Icon=${ALACRITTY_ICON}
