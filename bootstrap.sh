@@ -10,16 +10,13 @@ function print_header() {
   echo '################################################################################'
 }
 
-EXTRAS_DIR="$HOME/tools"
-if [[ ! -d $EXTRAS_DIR ]]; then
-  mkdir $EXTRAS_DIR
-fi
-if [[ ! -f $EXTRAS_DIR/README.md ]]; then
-  cat >$EXTRAS_DIR/README.md <<EOF
-User-owned directory for extra things that need to be installed and shouldn't
-live in a privileged location
-EOF
-fi
+# Binary install location
+BIN_DEST=$HOME/.local/bin
+mkdir -p $BIN_DEST
+
+# Source install location
+EXTRAS_DIR="$HOME/.local/share"
+mkdir -p $EXTRAS_DIR
 
 # Obtain latest release version from Github
 #
@@ -104,7 +101,7 @@ function install_lazygit() {
   fi
 
   local LAZYGIT_ENDPOINT="https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
-  curl -fsSL $LAZYGIT_ENDPOINT | sudo tar -xvz -C /usr/local/bin lazygit
+  curl -fsSL $LAZYGIT_ENDPOINT | tar -xvz -C $BIN_DEST lazygit
 }
 if [[ $(command -v lazygit) ]]; then
   echo "lazygit already installed"
@@ -116,7 +113,7 @@ function install_diffsofancy() {
   echo "Installing diff-so-fancy from git repo"
   DIFF_SO_FANCY=$EXTRAS_DIR/diff-so-fancy
   git clone https://github.com/so-fancy/diff-so-fancy.git $DIFF_SO_FANCY
-  sudo ln -s $DIFF_SO_FANCY/diff-so-fancy /usr/local/bin/
+  ln -sf $DIFF_SO_FANCY/diff-so-fancy $BIN_DEST
 }
 if [[ $(command -v diff-so-fancy) ]]; then
   echo "diff-so-fancy already installed"
@@ -138,11 +135,12 @@ function install_nvim() {
   curl -fsSL $NVIM_ENDPOINT -o $NVIM_TMP_PATH
 
   # Extract the appimage and move to final location
+  NVIM_DEST=$EXTRAS_DIR/nvim
   chmod +x $NVIM_TMP_PATH
   $(cd $(dirname $NVIM_TMP_PATH) && $NVIM_TMP_PATH --appimage-extract)
   local EXTRACTED_PATH=$(dirname $NVIM_TMP_PATH)/squashfs-root
-  sudo mv $EXTRACTED_PATH /opt/nvim
-  sudo ln -sf /opt/nvim/AppRun /usr/local/bin/nvim
+  mv $EXTRACTED_PATH $NVIM_DEST
+  ln -sf $NVIM_DEST/AppRun $BIN_DEST/nvim
 
   # Cleanup
   rm $NVIM_TMP_PATH
@@ -160,7 +158,7 @@ function install_fzf() {
   local FZF_VERSION=$(get_github_release_version junegunn/fzf)
   echo "Installing fzf $FZF_VERSION from github release"
   local FZF_ENDPOINT="https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz"
-  curl -fsSL $FZF_ENDPOINT | sudo tar -xvz -C /usr/local/bin fzf
+  curl -fsSL $FZF_ENDPOINT | tar -xvz -C $BIN_DEST fzf
 }
 if [[ $(command -v fzf) ]]; then
   echo "fzf already installed"
