@@ -239,6 +239,10 @@ EOF
   )
 done
 
+# Environment variables with or without values shown
+alias fzenv='printenv | fzf'
+alias fzenvp='printenv | cut --delimiter = --fields 1 | fzf --preview "printenv {}"'
+
 # =============================================================================
 # Source local zshrc
 # =============================================================================
