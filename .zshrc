@@ -8,9 +8,6 @@ export LOCAL_ZSHRC="$HOME/.local_zshrc"
 function append_path() {
   export PATH=$PATH:$1
 }
-append_path $HOME/bin
-append_path $HOME/.local/bin
-append_path /usr/local/bin
 
 # =============================================================================
 # ZSH configuration
@@ -72,18 +69,22 @@ alias zshrc="$EDITOR ~/.zshrc"
 alias lzshrc="$EDITOR $LOCAL_ZSHRC"
 
 # Alias builtins and GNU standard tools
-command -v zoxide >/dev/null && eval "$(zoxide init zsh)" && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias path='echo $PATH | tr ":" "\n"'
+if [[ $(command -v zoxide) ]]; then
+  eval "$(zoxide init zsh)" && alias cd='z'
+fi
 if [[ $(command -v eza) ]]; then
   alias ls='eza'
   alias ll='eza -lagh --classify always'
   # Always ignore certain directories for tree view
   alias tree='eza -T --ignore-glob="venv|.git"'
 fi
-command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+if [[ $(command -v atuin) ]]; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
 
 # Tmux stuff
 alias tls='tmux list-sessions'
@@ -158,9 +159,6 @@ alias python='python3'
 
 # Added for rust
 source "$HOME/.cargo/env"
-
-# Added for golang
-export PATH=$PATH:/usr/local/go/bin
 
 # Normal defaults for rsync
 alias rsync='rsync -a --info=progress2'
