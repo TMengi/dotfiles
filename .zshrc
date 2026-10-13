@@ -38,7 +38,6 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
   bazel
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -92,81 +91,64 @@ alias tat='tmux a -t'
 
 # Git aliases
 alias g='git'
-alias gce='git checkout'
-alias gw='git switch'
-alias grs='git restore'
-alias gp='git pull'
-alias gd='git diff'
-alias gb='git branch -vv'
-alias ga='git add'
-alias gr='git rebase'
-alias gst='git stash'
-alias gdu='git diff @{upstream}'
-alias gdno='git diff --name-only'
-alias gduno='git diff @{upstream} --name-only'
 alias gs='git status -bs'
-alias gc='git commit'
-alias gcm='git commit -m'
+alias groot='cd $(git rev-parse --show-toplevel)'
 alias gl='git lg'
-alias gcem='git checkout master'
-alias gceu='git checkout @{upstream}'
+alias lg='lazygit'
+# Branches
+alias gw='git switch'
+alias gwc='git switch -c'
 alias gwm='git switch master'
 alias gwu='git switch @{upstream}'
-alias grsm='git restore --source=master'
-alias grsu='git restore --source=@{upstream}'
-alias gdm='git diff master'
-alias gdmno='git diff master --name-only'
-alias gds='git diff --staged'
-alias gca='git commit --amend'
-alias gcane='git commit --amend --no-edit'
-alias gsuc='git submodule update --checkout'
+alias gb='git branch -vv'
+alias gbb='gb | grep "^\*"'
+alias gbd='gb | grep -P "(?<=\[)$(git branch --show-current)"' # Downstream branches
+alias gbg='gb | grep gone'
 alias gbsutm='git branch --set-upstream-to master'
 alias gbum='git branch -u master'
-alias gsl='git stash list'
-alias gspm='git stash push -m'
-alias gsa='git stash apply'
+# Diff
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gdm='git diff master'
+alias gdu='git diff @{upstream}'
+alias gdno='git diff --name-only'
+alias gdmno='git diff master --name-only'
+alias gduno='git diff @{upstream} --name-only'
+alias gdo='git diff origin/"$(git branch --show-current)"'
+# Commit
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit --message'
+alias gca='git commit --amend'
+alias gcane='git commit --amend --no-edit'
+# Push/pull
+alias gp='git pull'
+alias gpo='git push origin'
+alias gponv='git push origin --no-verify'
+# Merges and rebases
+alias gm='git merge'
+alias gr='git rebase'
 alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
-alias gbb='gb | grep "^\*"'
-alias gbd='gb | grep -P "(?<=\[)$(git branch --show-current)"'
-alias gbg='gb | grep gone'
-alias gdo='git diff origin/"$(git branch --show-current)"'
-alias lg='lazygit'
-alias gpo='git push origin'
-alias gponv='git push origin --no-verify'
-alias groot='cd $(git rev-parse --show-toplevel)'
+# Restore
+alias grs='git restore'
+alias grsm='git restore --source=master'
+alias grsu='git restore --source=@{upstream}'
+# Stash
+alias gst='git stash'
+alias gsl='git stash list'
+alias gspm='git stash push -m'
+alias gsa='git stash apply'
+# Deprecated
+alias gce='git checkout'
+alias gcem='git checkout master'
+alias gceu='git checkout @{upstream}'
+alias gsuc='git submodule update --checkout'
 
 # Forge tools aliases
 alias gv='forge_tools view'
 alias gfp='forge_tools fetch-prune'
-
-# Displays previous git branches.
-#
-# Optional argument is the number of branches to display. Defaults to 5.
-function gbp() {
-  num_branches=${1:-5}
-  for ((ii = 1; ii <= num_branches; ii++)); do
-    local githash="$(git rev-parse @{-$ii})"
-    local branch="$(git describe --all $githash)"
-    echo "$ii: $branch"
-  done
-}
-
-# Checks out a previous branch
-#
-# Argument is how many branches to go backwards. Branch numbering can be
-# checked with gbp
-function gcep() {
-  git checkout @{$1}
-}
-
-# Create a new branch with upstream set to the current branch
-function gwc() {
-  local parent_branch="$(git branch --show-current)"
-  git switch -c $@
-  git branch --set-upstream-to $parent_branch
-}
 
 # Zellij aliases
 alias zj='zellij'
