@@ -41,7 +41,7 @@ api.nvim_create_autocmd('FileType', {
 -- Search and highlighting
 opt.smartcase = true
 opt.hls = true
-keymap.set('n', '<leader>hh', ':set hls!<cr>', silent_noremap)
+keymap.set('n', '<leader>hl', ':set hls!<cr>', silent_noremap)
 
 -- Split windows the way I expect them
 opt.splitbelow = true
