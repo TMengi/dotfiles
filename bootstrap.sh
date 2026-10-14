@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Parse force flags
+FORCE_NEOVIM=
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+  "--force-nvim")
+    FORCE_NEOVIM=1
+    ;;
+  *)
+    echo "Unrecognized option: $1"
+    exit 1
+  esac
+  shift
+done
+
 DOTFILES_BASE=$(dirname $(realpath $0))
 
 function print_header() {
@@ -48,7 +62,8 @@ sudo apt install -y \
   wl-clipboard \
   jq \
   stow \
-  fd-find
+  fd-find \
+  rsync
 
 ###############################################################################
 print_header "Installing shell"
@@ -139,13 +154,13 @@ function install_nvim() {
   chmod +x $NVIM_TMP_PATH
   $(cd $(dirname $NVIM_TMP_PATH) && $NVIM_TMP_PATH --appimage-extract)
   local EXTRACTED_PATH=$(dirname $NVIM_TMP_PATH)/squashfs-root
-  mv $EXTRACTED_PATH $NVIM_DEST
+  rsync -a --remove-source-files $EXTRACTED_PATH/* $NVIM_DEST
   ln -sf $NVIM_DEST/AppRun $BIN_DEST/nvim
 
   # Cleanup
   rm $NVIM_TMP_PATH
 }
-if [[ $(command -v nvim) ]]; then
+if [[ $(command -v nvim) && -z $FORCE_NEOVIM ]]; then
   echo "nvim already installed"
 else
   install_nvim
